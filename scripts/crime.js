@@ -7,6 +7,7 @@ var chicago_crime = {
 	metric: "",
 	grades: [],
 	years: [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
+	categories: ["HOMICIDE", "THEFT", "BATTERY", "NARCOTICS", "ASSAULT", "BURGLARY", "ROBBERY"],
 	dataSet: {},
 	dataSetLoaded: false,
 
@@ -39,6 +40,21 @@ var chicago_crime = {
 	*/
 	getDataSet: function() {
 		return this.dataSet;
+	},
+
+	getYears: function() {
+		return this.years;
+	},
+
+	getCategories: function() {
+		return this.categories;
+	},
+
+  setYear(year) {
+		this.year = Math.floor(year);
+		this.name = this.year + ":" + this.id;
+		this.title = this.year + ":" + this.id;
+		console.log("year: " + this.year + ", id: " + this.id);
 	},
 
 	/*

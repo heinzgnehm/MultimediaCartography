@@ -1,14 +1,30 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="styles/chicago.css"/>
-		<link rel="stylesheet" href="styles/jquery-ui.css"/>
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+		<!-- Remote stylesheets -->
+		<!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/> -->
+
+		<!-- Local stylesheets -->
+		<link rel="stylesheet" type="text/css" href="leaflet-0.7.7/leaflet.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/chicago.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/Atlas.css"/>
+		<link rel="stylesheet" type="text/css" href="jquery-ui-1.11.4/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="jstree-3.2.1/themes/default/style.min.css">
+		<link rel="stylesheet" type="text/css" href="noUiSlider-8.3.0/nouislider.css">
+		<link rel="stylesheet" type="text/css" href="noUiSlider-8.3.0/nouislider.pips.css">
+
+		<!-- Remote libraries -->
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+		<!-- <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> -->
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script> -->
+
+		<!-- Local libraries -->
+		<script type="text/javascript" src="leaflet-0.7.7/leaflet.js"></script>
+		<script type="text/javascript" src="jquery-2.2.3/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.11.4/external/jquery/jquery.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.11.4/jquery-ui.js"></script>
+		<script type="text/javascript" src="jstree-3.2.1/jstree.min.js"></script>
+		<script type="text/javascript" src="noUiSlider-8.3.0/nouislider.js"></script>
 
 	</head>
 	<body>
@@ -48,6 +64,11 @@
 		<!-- DIV element to display the leaflet map. -->
 		<div id="map" class="map"></id>
 
+		<!-- DIV element to display the time slider. -->
+		<div class="slider-container">
+			<div id="slider"></div>
+		</div>
+
 	</body>
 	<script src="scripts/social.js"></script>
 	<script src="scripts/crime.js"></script>
@@ -67,13 +88,14 @@
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
 				maxZoom: 18,
-				id: 'mapbox.light',
+				id: 'heinzgnehm.1llnqpli',
 				accessToken: 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA'
 			}).addTo(map);
 
 			/*
 				Global variables for the data set layer, the legend and the info box.
 			*/
+			var chosenDataSet;
 			var layer;
 			var legend;
 			var info;
@@ -90,6 +112,17 @@
 				}
 
 				chosenDataSet.init(name, title, metric);
+				showDataLayer(chosenDataSet);
+				showLegend(chosenDataSet);
+				showInfo(chosenDataSet);
+			}
+
+			/*
+				Show the selected year set on the base map.
+			*/
+			function showYear(year) {
+
+				chosenDataSet.setYear(year);
 				showDataLayer(chosenDataSet);
 				showLegend(chosenDataSet);
 				showInfo(chosenDataSet);

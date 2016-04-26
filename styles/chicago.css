@@ -2,7 +2,6 @@
 }
 
 #map {
-	height: 90%;
 }
 
 .menubar {
@@ -34,6 +33,14 @@
 .info h4 {
     margin: 0 0 5px;
     color: #777;
+}
+
+.info-button {
+	margin: 0 0 1px 0;
+	padding: 0 0 0 0;
+	height:23px;
+	width:23px;
+	border-radius: 50%;
 }
 
 .legend {
@@ -69,7 +76,7 @@ td {
   right: 0;
   bottom: 0px;
   background: #fff;
-  /*z-index: -1;*/
+  z-index: 0;
 }
 
 .navigation {
@@ -95,5 +102,41 @@ td {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   visibility: hidden;
 	z-index: 1;
+}
 
+#info-tab {
+	position:absolute;
+	top:50px;
+	padding-top:34px;
+	right:20px;
+	height:100%;
+	width:30px;
+	display:inline;
+	z-index: 1000;
+}
+
+.info-button {
+	margin: 0 0 1px 0;
+	padding: 0 0 0 0;
+	height: 23px;
+	width: 23px;
+	border-radius: 50%;
+}
+
+.slider-container {
+	position: absolute;
+	width: 800px;
+	height: 50px;
+	bottom: 50px;
+	left: 300px;
+	z-index: 0;
+}
+
+.ui-slider-tick-mark {
+	display:inline-block;
+	width:2px;
+	background:black;
+	height:16px;
+	position:absolute;
+	top:-4px;
 }

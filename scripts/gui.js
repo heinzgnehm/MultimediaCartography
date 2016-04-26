@@ -1,6 +1,6 @@
 var navigation = {
 		//"plugins": ["checkbox", "dnd", "search", "types", "search"],
-		"plugins": ["search", "types"],
+		"plugins": ["checkbox", "dnd", "search", "types"],
 		/*grid:{columns: [{tree:true,width:230},
 						{header:"info",width:20}],
 				width:250
@@ -18,61 +18,53 @@ var navigation = {
 						"children": [{
 								"id": "crime:HOMICIDE",
 								"text": "Homicide",
-								"children": [
-									{"id": "crime:HOMICIDE:2003", "text": "2003"},
-									{"id": "crime:HOMICIDE:2004", "text": "2004"},
-									{"id": "crime:HOMICIDE:2005", "text": "2005"},
-									{"id": "crime:HOMICIDE:2006", "text": "2006"},
-									{"id": "crime:HOMICIDE:2007", "text": "2007"},
-									{"id": "crime:HOMICIDE:2008", "text": "2008"},
-									{"id": "crime:HOMICIDE:2009", "text": "2009"},
-									{"id": "crime:HOMICIDE:2010", "text": "2010"},
-									{"id": "crime:HOMICIDE:2011", "text": "2011"},
-									{"id": "crime:HOMICIDE:2012", "text": "2012"},
-									{"id": "crime:HOMICIDE:2013", "text": "2013"},
-									{"id": "crime:HOMICIDE:2014", "text": "2014"},
-									{"id": "crime:HOMICIDE:2015", "text": "2015"},
-								]
+								"icon": "icons/svg/layer.svg",
+						}, {
+								"id": "crime:BURGLARY",
+								"text": "Burglary",
+								"icon": "icons/svg/layer.svg",
+						}, {
+								"id": "crime:ROBBERY",
+								"text": "Robbery",
+								"icon": "icons/svg/layer.svg",
 						}, {
 								"id": "crime:BATTERY",
 								"text": "Battery",
-								"children": [
-									{"id": "crime:BATTERY:2003", "text": "2003"},
-									{"id": "crime:BATTERY:2004", "text": "2004"},
-									{"id": "crime:BATTERY:2005", "text": "2005"},
-									{"id": "crime:BATTERY:2006", "text": "2006"},
-									{"id": "crime:BATTERY:2007", "text": "2007"},
-									{"id": "crime:BATTERY:2008", "text": "2008"},
-									{"id": "crime:BATTERY:2009", "text": "2009"},
-									{"id": "crime:BATTERY:2010", "text": "2010"},
-									{"id": "crime:BATTERY:2011", "text": "2011"},
-									{"id": "crime:BATTERY:2012", "text": "2012"},
-									{"id": "crime:BATTERY:2013", "text": "2013"},
-									{"id": "crime:BATTERY:2014", "text": "2014"},
-									{"id": "crime:BATTERY:2015", "text": "2015"},
-								]
+								"icon": "icons/svg/layer.svg",
+						}, {
+								"id": "crime:THEFT",
+								"text": "Theft",
+								"icon": "icons/svg/layer.svg",
+						}, {
+								"id": "crime:ASSAULT",
+								"text": "Assault",
+								"icon": "icons/svg/layer.svg",
+						}, {
+								"id": "crime:NARCOTICS",
+								"text": "Narcotics",
+								"icon": "icons/svg/layer.svg",
 						}],
 				}, {
 						"id": "ethnicity",
 						"text": "Ethnicity",
 						"children": [
-							{"id": "ethnicity:white_p:2010", "text": "White"},
-							{"id": "ethnicity:black_p:2010", "text": "Black"},
-							{"id": "ethnicity:asian_p:2010", "text": "Asian"},
-							{"id": "ethnicity:other_p:2010", "text": "Other"},
-							{"id": "ethnicity:mix_p:2010", "text": "Mixed"},
+							{"id": "ethnicity:white_p:2010", "text": "White", "icon": "icons/svg/layer.svg"},
+							{"id": "ethnicity:black_p:2010", "text": "Black", "icon": "icons/svg/layer.svg",},
+							{"id": "ethnicity:asian_p:2010", "text": "Asian", "icon": "icons/svg/layer.svg",},
+							{"id": "ethnicity:other_p:2010", "text": "Other", "icon": "icons/svg/layer.svg",},
+							{"id": "ethnicity:mix_p:2010", "text": "Mixed", "icon": "icons/svg/layer.svg",},
 						],
 				},
 				{
 						"id": "social",
 						"text": "Social-economic indicators",
 						"children": [
-							{"id": "social:hardship:", "text": "Hardship Index"},
-							{"id": "social:crowded:", "text": "Crowded Housing"},
-							{"id": "social:poverty:", "text": "Poverty"},
-							{"id": "social:income:", "text": "Income"},
-							{"id": "social:diploma:", "text": "Education"},
-							{"id": "social:notWorkingAge:", "text": "Dependence"},
+							{"id": "social:hardship", "text": "Hardship Index", "icon": "icons/svg/layer.svg",},
+							{"id": "social:crowded", "text": "Crowded Housing", "icon": "icons/svg/layer.svg",},
+							{"id": "social:poverty", "text": "Poverty", "icon": "icons/svg/layer.svg",},
+							{"id": "social:income", "text": "Income", "icon": "icons/svg/layer.svg",},
+							{"id": "social:diploma", "text": "Education", "icon": "icons/svg/layer.svg",},
+							{"id": "social:notWorkingAge", "text": "Dependence", "icon": "icons/svg/layer.svg",},
 						],
 				}]
 		},
@@ -98,19 +90,35 @@ var navigation = {
 		*/
 		$(function () {
 			$('#layers-tree').jstree(navigation);
+			//infocreate(navigation);
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
 				id = data.selected[0];
+
+				/*
+						The id identifies the chosen data set.
+						0 colons: top level folder -> no action.
+						1 colon:  data set without a time series (socio-economic indicators).
+						2 colons: data set with a time series (crime date, ethnicity).
+				*/
 				values = id.split(":");
 				dataSet = values[0];
 				category = values[1];
-				year = values[2];
-				console.log(dataSet + " - " + category + " - " + year);
-				if (year == "") {
-					showDataSet(dataSet, category, category, "");
+				if (dataSet == "crime") {
+					year = Math.floor(slider.noUiSlider.get());
 				} else {
-					showDataSet(dataSet, year + ":" + category, category, "");
+					year = values[2];
+				}
+				console.log("chosen Year on slider is " + year);
+				switch (dataSet) {
+					case "crime":     showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); showSlider(); break;
+					case "ethnicity": showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); hideSlider(); break;
+					case "social":    showDataSet(dataSet, category, category, ""); hideSlider(); break;
+					//case 1: console.log("Show sub-menu"); break;
+					//case 2: showDataSet(dataSet, category, category, ""); break;
+					//case 3: showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); break;
 				}
 			});
+
 		});
 
 		$('#collapse-left').button().click(function() {
@@ -169,3 +177,87 @@ var navigation = {
 		    },
 		    text: false
 		});
+
+		/*
+			Create the info buttons for each category.
+		*/
+		function infocreate(data) {
+		    //console.log(data);
+		    //console.log('oop');
+		    $("#info-tab").empty();
+		    data = data.core.data;
+		    for (i = 0; i < data.length; i++) {
+		        var folder = data[i].id;
+		        console.log(folder);
+		        var newinfo = "<button id=\"" + folder + "-info\" class=\"ui-btn ui-shadow ui-corner-all info-button\">info</button>";
+		        $("#info-tab").append(newinfo);
+		        //add event listener for the button
+		        $('#' + folder + '-info').button().click(function(event) {
+		            id = event.target.getAttribute('id');
+		            $('#dialog').dialog({
+		                title: id
+		            });
+		            $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+		            event.preventDefault();
+		        });
+		        if (data[i].state.opened == true) {
+		            for (j = 0; j < data[i].children.length; j++) {
+		                //console.log(data[data[folder].children[j]].state.opened);
+		                var newinfo = "<button id=\"" + data[i].children[j].id + "-info\" class=\"ui-btn ui-shadow ui-corner-all info-button\">info</button>";
+		                //console.log(newinfo);
+		                $("#info-tab").append(newinfo);
+		                $('#' + data[i].children[j].id + '-info').button().click(function(event) {
+		                    id = event.target.getAttribute('id');
+		                    $('#dialog').dialog({
+		                        title: id
+		                    });
+		                    $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+		                    event.preventDefault();
+		                });
+		            }
+		        }
+
+		    }
+		    $(".info-button").button({
+		        icons: {
+		            primary: "ui-icon-info"
+		        },
+		        text: false
+		    });
+		};
+
+		var slider = document.getElementById('slider');
+
+		noUiSlider.create(slider, {
+			start: [ 2003 ],
+			step: 1,
+			range: {
+				'min': 2003,
+				'max': 2015
+			},
+			pips: {
+				mode: 'count',
+				values: 2015-2003 + 1,
+				density: -1,
+			}
+		});
+
+			slider.noUiSlider.on('update', function (values, handle) {
+			console.log("slider changed to " + values[handle]);
+			showYear(values[handle]);
+		});
+
+			slider.noUiSlider.on('change', function (values, handle) {
+			console.log("slider changed to " + values[handle]);
+			showYear(values[handle]);
+		});
+
+		function showSlider() {
+			console.log("show time slider");
+			$('.slider-container').css("z-index", "2");
+		}
+
+		function hideSlider() {
+			console.log("hide time slider");
+			$('.slider-container').css("z-index", "0");
+		}
