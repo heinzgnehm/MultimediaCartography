@@ -99,14 +99,14 @@ var chicago_crime = {
 
 	getColor: function(d) {
 
-			return 	d > this.grades[7] ? '#800026' :
-							d > this.grades[6] ? '#BD0026' :
-							d > this.grades[5] ? '#E31A1C' :
-							d > this.grades[4] ? '#FC4E2A' :
-							d > this.grades[3] ? '#FD8D3C' :
-							d > this.grades[2] ? '#FEB24C' :
-							d > this.grades[1] ? '#FED976' :
-																	'#FFEDA0';
+			color = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
+
+			for (var i = 7; i > 0; i--) {
+				if (d > this.grades[i]) {
+					return color[i];
+				}
+			}
+			return color[0];
 	},
 
 	getDiv: function() {
