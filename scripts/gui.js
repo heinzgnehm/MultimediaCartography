@@ -177,6 +177,16 @@ var navigation = {
 		    },
 		    text: false
 		});
+		
+		$('#tabs').tabs();
+
+
+$('#autocomplete').autocomplete({
+    source: ['Innovative Map', 'Future Map']
+});
+
+$('#menu-1,#menu-2').menu();
+
 
 		/*
 			Create the info buttons for each category.
