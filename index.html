@@ -30,7 +30,7 @@
 	<body>
 
 		<!-- DIV element to show the menu bar at the top. -->
-		<div class="menubar">
+		<div class="menubar ns">
 		  <span id="title">Exploring crime, ethnicity and socio-economic indicators of Chicago</span>
 		  <button id="imprint">Imprint</button>
 		  <button id="about">About</button>
@@ -40,14 +40,19 @@
 		</div>
 
 		<!-- DIV element to display the menu on the left side. -->
+
 		<div class="navigation ns">
+
 			<div id="tabs">
-				<button id="collapse-left" class="ui-btn ui-shadow ui-corner-all">Hide</button>
-				<div id="tabs-1">
-					<input id="search-layer" placeholder="Search layer">
-					<div id="layers-tree"></div>
-					<div id="info-tab"></div>
-				</div>
+  				<button id="collapse-left" class="ui-btn ui-shadow ui-corner-all  ">Collapse left</button>
+  				<ul>
+    					<li><a href="#tabs-1">Layers</a></li>
+  				</ul>
+  			<div id="tabs-1">
+  			<input id="search-layer" placeholder="Search layer">
+			<div id="layers-tree"></div>
+			<div  id="jstree-button-tab"></div>
+  			</div>
 			</div>
 		</div>
 
