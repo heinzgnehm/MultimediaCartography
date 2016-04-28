@@ -1,0 +1,16 @@
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: 10px;
+  color: black;
+  background: white;
+}
+
+a:link {
+  color: #05d;
+  text-decoration: none
+}
+
+a:visited {
+  color: #7af;
+  text-decoration: none
+}
