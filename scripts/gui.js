@@ -239,9 +239,6 @@ $('#menu-1,#menu-2').menu();
 			$('.slider-container').css("z-index", "0");
 		}
 
-/*add geocoder control*/
-console.log(map);
-var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
 /* the fuction take the text in the search field make a query to the mapbox geocoder, 
 display only four result and when clicked on the result zoom either to its bbox (if present) or to its center*/
 function geocodeThis() {

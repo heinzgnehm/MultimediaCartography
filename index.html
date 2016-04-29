@@ -85,22 +85,30 @@
 			/*
 				Set the initial map view.
 			*/
-			var map = L.map('map', {zoomControl: false}).setView([41.8369, -87.6847], 11);
+			var southWest = L.latLng(42.363436, -88.6074225),
+                   	    northEast = L.latLng(41.272109, -87),
+                            chicagoBounds = L.latLngBounds(southWest, northEast);
+                    	L.mapbox.accessToken = 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA';
+			var map = L.mapbox.map('map','heinzgnehm.1llnqpli', {zoomControl: false,
+						       maxBounds: chicagoBounds,
+    						       maxZoom: 16,
+   						       minZoom: 10}).setView([41.8369, -87.6847], 11);
 			map.addControl(L.control.zoom({position: 'bottomleft'}));
 
 			/*
 				Load OpenStreeMap data from Mapbox.
 			*/
+			/**
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
-				maxZoom: 18,
+				maxZoom: 12,
 				id: 'heinzgnehm.1llnqpli',
 				accessToken: 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA'
 			}).addTo(map);
+			**/
 			/* 
 				Add geocoder
 			*/
-			L.mapbox.accessToken = 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA';
 			var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
 			/*
 				Global variables for the data set layer, the legend and the info box.
