@@ -15,6 +15,9 @@ var navigation = {
 				'data': [{
 						"id": "crime",
 						"text": "Crime",
+ 						"state": {
+   					                 "opened": false,
+              					},
 						"children": [{
 								"id": "crime:HOMICIDE",
 								"text": "Homicide",
@@ -47,6 +50,9 @@ var navigation = {
 				}, {
 						"id": "ethnicity",
 						"text": "Ethnicity",
+ 						"state": {
+   					                 "opened": false,
+              					},						
 						"children": [
 							{"id": "ethnicity:white_p:2010", "text": "White", "icon": "icons/svg/layer.svg"},
 							{"id": "ethnicity:black_p:2010", "text": "Black", "icon": "icons/svg/layer.svg",},
@@ -58,6 +64,9 @@ var navigation = {
 				{
 						"id": "social",
 						"text": "Social-economic indicators",
+ 						"state": {
+   					                 "opened": false,
+              					},
 						"children": [
 							{"id": "social:hardship", "text": "Hardship Index", "icon": "icons/svg/layer.svg",},
 							{"id": "social:crowded", "text": "Crowded Housing", "icon": "icons/svg/layer.svg",},
@@ -90,7 +99,7 @@ var navigation = {
 		*/
 		$(function () {
 			$('#layers-tree').jstree(navigation);
-			//infocreate(navigation);
+			infocreate(navigation);
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
 				id = data.selected[0];
 
@@ -158,6 +167,11 @@ var navigation = {
 			});
 			$('#dialogframe').prop('src', url);event.preventDefault();
 		});
+		$('#fullscreen').button().click(function(event) {
+   			 var element = document.querySelector('body');
+   			 toggleFullscreen(element);
+ 
+}		);
 
 		$("#fullscreen").button({
 		    icons: {
@@ -188,53 +202,6 @@ $('#autocomplete').autocomplete({
 $('#menu-1,#menu-2').menu();
 
 
-		/*
-			Create the info buttons for each category.
-		*/
-		function infocreate(data) {
-		    //console.log(data);
-		    //console.log('oop');
-		    $("#info-tab").empty();
-		    data = data.core.data;
-		    for (i = 0; i < data.length; i++) {
-		        var folder = data[i].id;
-		        console.log(folder);
-		        var newinfo = "<button id=\"" + folder + "-info\" class=\"ui-btn ui-shadow ui-corner-all info-button\">info</button>";
-		        $("#info-tab").append(newinfo);
-		        //add event listener for the button
-		        $('#' + folder + '-info').button().click(function(event) {
-		            id = event.target.getAttribute('id');
-		            $('#dialog').dialog({
-		                title: id
-		            });
-		            $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
-		            event.preventDefault();
-		        });
-		        if (data[i].state.opened == true) {
-		            for (j = 0; j < data[i].children.length; j++) {
-		                //console.log(data[data[folder].children[j]].state.opened);
-		                var newinfo = "<button id=\"" + data[i].children[j].id + "-info\" class=\"ui-btn ui-shadow ui-corner-all info-button\">info</button>";
-		                //console.log(newinfo);
-		                $("#info-tab").append(newinfo);
-		                $('#' + data[i].children[j].id + '-info').button().click(function(event) {
-		                    id = event.target.getAttribute('id');
-		                    $('#dialog').dialog({
-		                        title: id
-		                    });
-		                    $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
-		                    event.preventDefault();
-		                });
-		            }
-		        }
-
-		    }
-		    $(".info-button").button({
-		        icons: {
-		            primary: "ui-icon-info"
-		        },
-		        text: false
-		    });
-		};
 
 		var slider = document.getElementById('slider');
 
@@ -254,7 +221,7 @@ $('#menu-1,#menu-2').menu();
 
 			slider.noUiSlider.on('update', function (values, handle) {
 			console.log("slider changed to " + values[handle]);
-			showYear(values[handle]);
+			//showYear(values[handle]);
 		});
 
 			slider.noUiSlider.on('change', function (values, handle) {
@@ -271,3 +238,302 @@ $('#menu-1,#menu-2').menu();
 			console.log("hide time slider");
 			$('.slider-container').css("z-index", "0");
 		}
+
+/*add geocoder control*/
+console.log(map);
+var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
+/* the fuction take the text in the search field make a query to the mapbox geocoder, 
+display only four result and when clicked on the result zoom either to its bbox (if present) or to its center*/
+function geocodeThis() {
+    var text = document.getElementById('search').value;
+    console.log(text);
+    if (text.length >= 1) {
+        geocoderControl.geocoder.query({
+            query: text,
+            country: 'us',
+            proximity: L.LatLng(41.881832, -87.623177)
+        }, function(err, res) {
+            $("#search-results").empty();
+            //console.log(err);
+            console.log(res.results.features);
+            results = res.results.features;
+            if (results.length > 0) {
+                var maxitems = 4;
+                var southWest = L.latLng(42.363436, -87.6074225),
+                    northEast = L.latLng(41.272109, -88.838157),
+                    chicagoBounds = L.latLngBounds(southWest, northEast);
+                var showCount = 0;
+                for (i = 0; i < results.length; i++) {
+                    if (showCount > 4) {
+                        break
+                    }
+                    if (results[i].hasOwnProperty('bbox')) {
+                        var southWest = L.latLng(results[i].bbox[1], results[i].bbox[0]),
+                            northEast = L.latLng(results[i].bbox[3], results[i].bbox[2]),
+                            resBounds = L.latLngBounds(southWest, northEast);
+                    } else {
+                        resBounds = false
+                    }
+                    var resCenter = L.latLng(results[i].center[1], results[i].center[0]);
+                    if ((chicagoBounds.contains(resCenter)) || (resBounds && chicagoBounds.intersects(resBounds)) ) {
+						var labels = results[i].place_name.split(',');
+						if (labels.length>2)
+							{labels.splice(-2,2);}
+						else if (labels.length>1)
+							{labels.splice(-1,1);}
+						else {}
+						var label=labels.join(',');
+						
+                        var newinstance = "<div class=\"address-result\" id=\"add-res" + i + "\">" + label+ "</div>";
+                        $("#search-results").append(newinstance);
+                        showCount++;
+                        $("#add-res" + i).data({
+                            "bbox": resBounds,
+                            "center": resCenter
+                        })
+                        $("#add-res" + i).click(function() {
+                            $(".address-result").css("background-color", "white");
+                            $(this).css("background-color", "#e4eff8");
+                            //console.log("hey");
+                            //console.log($(this).data("bbox"));
+                            if ($(this).data("bbox")) {
+                                var bbox = $(this).data("bbox");
+                                map.fitBounds(bbox);
+                            } else {
+                                var center = $(this).data("center");
+
+                                map.setView(center, 16);
+                            }
+                        });
+                    }
+                    //console.log( $("#add-res"+i));
+
+
+                }
+                if (showCount > maxitems) {
+                    var newinstance = "<div class=\"address-result\" id=\"add-res-etc\">...</div>";
+                    $("#search-results").append(newinstance);
+
+                }
+
+                $("#search-results").css("visibility", "visible");
+            } else {
+                $("#search-results").css("visibility", "hidden");
+            }
+
+        });
+    } else {
+        $("#search-results").css("visibility", "hidden");
+    }
+
+}
+// listener to keyup and enter four lauch the geocoding
+
+$('#search').keyup(function() {
+    geocodeThis();
+
+});
+$('#search').keydown(function(e) {
+    if (13 == e.keyCode) {
+        geocodeThis();
+    };
+
+});
+
+geocoderControl.on('found', function(res) {
+    console.log(res);
+    //output.innerHTML = JSON.stringify(res.results.features[0]);
+});
+
+
+/*** function to refresh info and bar buttons ***/
+/** refresh the info button in the selected tree
+ * @param {json} data: tree data
+ */
+function refreshinfo(data) {
+    //console.log(data);
+    //console.log('oop');
+    $("#jstree-button-tab").empty();
+    for (i = 0; i < data['#'].children.length; i++) {
+        var folder = data['#'].children[i];
+        //console.log(folder);
+	var newbuttoncontainer = $("<div class=\"jstree-button-container\"></div>");
+        var newinfo = "<button id=\"" + folder + "-info\" class=\"ui-btn ui-shadow ui-corner-all jstree-button info-button\">info</button>";
+        newbuttoncontainer.append(newinfo);
+	$("#jstree-button-tab").append(newbuttoncontainer);
+        //add event listener for the button
+        $('#' + folder + '-info').button().click(function(event) {
+            id = event.target.getAttribute('id');
+            $('#dialog').dialog({
+                title: id
+            });
+            $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+            event.preventDefault();
+        });
+        if (data[folder].state.opened == true) {
+            for (j = 0; j < data[folder].children.length; j++) {
+		subid =data[folder].children[j].replace(/:/g,'-');
+		var newbuttoncontainer = $("<div class=\"jstree-button-container\"></div>");
+		// bar graph test
+		var newbar = "<button  id=\""  + subid + "-bar\" class=\"ui-btn ui-corner-all  jstree-button bar-button\"></button>";
+		newbuttoncontainer.append(newbar);
+                //console.log(data[subid].state.opened);
+                var newinfo = "<button id=\"" + subid + "-info\" class=\"ui-btn ui-shadow ui-corner-all jstree-button info-button\">info</button>";
+                //console.log(newinfo);
+                newbuttoncontainer.append(newinfo);
+		$("#jstree-button-tab").append(newbuttoncontainer);
+		// add event listener to info button
+                $('#' + subid + '-info').button().click(function(event) {
+                    id = event.target.getAttribute('id');
+		    console.log(id);
+                    $('#dialog').dialog({
+                        title: id
+                    });
+                    $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+                    event.preventDefault();
+                });
+		// bar button clicl event
+		$('#' + subid + '-bar').button().click(function(event) {
+                    id = event.target.getAttribute('id');
+		    // to do toglle bar graph
+                    event.preventDefault();
+                });
+            }
+        }
+
+    }
+    $(".info-button").button({
+        icons: {
+            primary: "ui-icon-info"
+        },
+        text: false
+    });
+    $(".bar-button").button({
+	icons: {
+            primary: "ui-icon-bar"
+        },
+        text: false
+    });
+};
+/** create the initilas info buttons 
+
+ * @param {json} data: initial tree data
+ */
+function infocreate(data) {
+    //console.log(data);
+    //console.log('oop');
+    $("#jstree-button-tab").empty();
+    data = data.core.data;
+    for (i = 0; i < data.length; i++) {
+        var folder = data[i].id;
+        //console.log(folder);
+	var newbuttoncontainer = $("<div class=\"jstree-button-container\"></div>");
+        var newinfo = "<button id=\"" + folder + "-info\" class=\"ui-btn ui-shadow ui-corner-all jstree-button info-button\">info</button>";
+        newbuttoncontainer.append(newinfo);
+	$("#jstree-button-tab").append(newbuttoncontainer);
+        //add event listener for the button
+        $('#' + folder + '-info').button().click(function(event) {
+            id = event.target.getAttribute('id');
+            $('#dialog').dialog({
+                title: id
+            });
+            $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+            event.preventDefault();
+        });
+        if (data[i].state.opened == true) {
+            for (j = 0; j < data[i].children.length; j++) {
+		subid =data[folder].children[j].replace(/:/g,'-');
+		// bar graph test
+		var newbuttoncontainer = $("<div class=\"jstree-button-container\"></div>");
+		var newbar = "<button  id=\""  + subid + "-bar\" class=\"ui-btn ui-corner-all  jstree-button bar-button\"></button>";
+                //console.log(data[data[folder].children[j]].state.opened);
+                var newinfo = "<button id=\"" + subid + "-info\" class=\"ui-btn ui-shadow ui-corner-all info-button\">info</button>";
+                //console.log(newinfo);
+                newbuttoncontainer.append(newinfo);
+		$("#jstree-button-tab").append(newbuttoncontainer);
+                $('#' + subid + '-info').button().click(function(event) {
+                    id = event.target.getAttribute('id');
+                    $('#dialog').dialog({
+                        title: id
+                    });
+                    $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+                    event.preventDefault();
+                });
+		// bar button clicl event
+		$('#' + subid + '-bar').button().click(function(event) {
+                    id = event.target.getAttribute('id');
+		    // to do toglle bar graph
+                    event.preventDefault();
+                });
+            }
+        }
+
+    }
+    $(".info-button").button({
+        icons: {
+            primary: "ui-icon-info"
+        },
+        text: false
+    });
+    $(".bar-button").button({
+	icons: {
+            primary: "ui-icon-bar"
+        },
+        text: false
+    });
+};
+
+//event listener for object clicked to refresj the buttons
+$('#layers-tree')
+    // listen for event
+    .on('changed.jstree', function(e, data) {
+	refreshinfo($("#layers-tree").jstree(true)._model.data);
+        // to do: toggle visibility of layers.
+    })
+//open
+$('#layers-tree')
+    // listen for event
+    .on('open_node.jstree', function(e, data) {
+        refreshinfo($("#layers-tree").jstree(true)._model.data);
+    })
+    //close
+$('#layers-tree')
+    // listen for event
+    .on('close_node.jstree', function(e, data) {
+        refreshinfo($("#layers-tree").jstree(true)._model.data);
+    })
+    //event listener for drag and drop
+    //close
+$('#layers-tree')
+    // listen for event
+    .on('move_node.jstree', function(e, data) {
+        console.log("hheee");
+        refreshinfo($("#layers-tree").jstree(true)._model.data);
+    })
+
+/*** Toggle full screen function ***/
+function toggleFullscreen(elem) {
+    elem = elem || document.documentElement;
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+}
