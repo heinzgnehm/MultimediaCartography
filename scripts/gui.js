@@ -171,7 +171,14 @@ var navigation = {
    			 var element = document.querySelector('body');
    			 toggleFullscreen(element);
  
-}		);
+		});
+		/* home button event and layover */
+		$('#home-map').button().click(function(event) {
+   			 map.setView([41.8369, -87.6847], 11);
+ 
+		});
+		$('#home-map').button().hover(function(){$(this).removeClass("home-map").addClass("home-map-mouseover")}
+					     ,function(){$(this).removeClass("home-map-mouseover").addClass("home-map")});
 
 		$("#fullscreen").button({
 		    icons: {
@@ -191,7 +198,12 @@ var navigation = {
 		    },
 		    text: false
 		});
-		
+		$("#home-map").button({
+		   /* icons: {
+		        primary: "ui-icon-home"
+		    },*/
+		    text: false
+		});
 		$('#tabs').tabs();
 
 
