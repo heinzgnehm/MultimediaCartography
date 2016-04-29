@@ -101,7 +101,14 @@ var navigation = {
 			$('#layers-tree').jstree(navigation);
 			infocreate(navigation);
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
-				id = data.selected[0];
+				console.log(e);
+				console.log(data);
+				id = data.selected[data.selected.length-1];
+				if (data.selected.length>1){
+					for (i=0;i<data.selected.length-1;i++){
+					$('#layers-tree').jstree(true).deselect_node(data.selected[i]);
+					}}
+				
 
 				/*
 						The id identifies the chosen data set.
