@@ -228,9 +228,9 @@ height:50px;
 bottom:50px;
 left:300px;
 z-index:1;
-/*zoom: 0.9;
--moz-transform: scale(0.9);*/}
-
+zoom: 0.9;
+-moz-transform: scale(0.9);}
+/*
 .ui-slider-tick-mark{
     display:inline-block;
     width:2px;
@@ -238,7 +238,7 @@ z-index:1;
     height:16px;
     position:absolute;
     top:-4px;
-}
+}*/
 .legend {
     line-height: 18px;
     color: #555;
