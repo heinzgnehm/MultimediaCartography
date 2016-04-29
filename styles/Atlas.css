@@ -296,4 +296,8 @@ background:#F7F7F7 !important;
 .home-map{
 background:white!important;
 }
+.no_checkbox>i.jstree-checkbox
+{
+    display:none
+}
 

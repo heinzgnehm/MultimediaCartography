@@ -17,7 +17,11 @@ var navigation = {
 						"text": "Crime",
  						"state": {
    					                 "opened": false,
+   					                 "disabled":true
               					},
+              					a_attr: {
+        					class: "no_checkbox"
+    						},
 						"children": [{
 								"id": "crime:HOMICIDE",
 								"text": "Homicide",
@@ -52,7 +56,11 @@ var navigation = {
 						"text": "Ethnicity",
  						"state": {
    					                 "opened": false,
-              					},						
+   					                 "disabled":true
+              					},
+              					a_attr: {
+        					class: "no_checkbox"
+    						},						
 						"children": [
 							{"id": "ethnicity:white_p:2010", "text": "White", "icon": "icons/svg/layer.svg"},
 							{"id": "ethnicity:black_p:2010", "text": "Black", "icon": "icons/svg/layer.svg",},
@@ -66,7 +74,11 @@ var navigation = {
 						"text": "Social-economic indicators",
  						"state": {
    					                 "opened": false,
+   					                 "disabled":true,
               					},
+              					a_attr: {
+        					class: "no_checkbox"
+    						},
 						"children": [
 							{"id": "social:hardship", "text": "Hardship Index", "icon": "icons/svg/layer.svg",},
 							{"id": "social:crowded", "text": "Crowded Housing", "icon": "icons/svg/layer.svg",},
@@ -100,10 +112,15 @@ var navigation = {
 		$(function () {
 			$('#layers-tree').jstree(navigation);
 			infocreate(navigation);
+			$("#layers-tree").bind("loaded.jstree", function(event, data) {
+   					$('.lvl1').find('ins.jstree-checkbox').hide();
+					}).jstree({});
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
 				console.log(e);
 				console.log(data);
+				// get last selected data
 				id = data.selected[data.selected.length-1];
+				// deselect all the rest
 				if (data.selected.length>1){
 					for (i=0;i<data.selected.length-1;i++){
 					$('#layers-tree').jstree(true).deselect_node(data.selected[i]);
@@ -136,6 +153,8 @@ var navigation = {
 			});
 
 		});
+		
+		
 
 		$('#collapse-left').button().click(function() {
 				$('.navigation').css("visibility", "hidden");
