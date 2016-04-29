@@ -2,11 +2,12 @@
 	<head>
 
 		<!-- Remote stylesheets -->
+		<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 		<!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/> -->
 
 		<!-- Local stylesheets -->
 		<link rel="stylesheet" type="text/css" href="libs/leaflet-0.7.7/leaflet.css"/>
-		<link rel="stylesheet" type="text/css" href="styles/chicago.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="styles/chicago.css"/>-->
 		<link rel="stylesheet" type="text/css" href="styles/Atlas.css"/>
 		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.11.4/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="libs/jstree-3.2.1/themes/default/style.min.css">
@@ -14,13 +15,14 @@
 		<link rel="stylesheet" type="text/css" href="libs/noUiSlider-8.3.0/nouislider.pips.css">
 
 		<!-- Remote libraries -->
+		<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
 		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 		<!-- <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> -->
 		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script> -->
 
 		<!-- Local libraries -->
-		<script type="text/javascript" src="libs/leaflet-0.7.7/leaflet.js"></script>
-		<script type="text/javascript" src="libs/jquery-2.2.3/jquery-2.2.3.min.js"></script>
+		<!--<script type="text/javascript" src="libs/leaflet-0.7.7/leaflet.js"></script>-->
+		<!--<script type="text/javascript" src="libs/jquery-2.2.3/jquery-2.2.3.min.js"></script>-->
 		<script type="text/javascript" src="libs/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
 		<script type="text/javascript" src="libs/jquery-ui-1.11.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="libs/jstree-3.2.1/jstree.min.js"></script>
@@ -78,7 +80,6 @@
 	<script src="scripts/social.js"></script>
 	<script src="scripts/crime.js"></script>
 	<script src="scripts/ethnicity.js"></script>
-	<script src="scripts/gui.js"></script>
 	<script>
 
 			/*
@@ -96,7 +97,11 @@
 				id: 'heinzgnehm.1llnqpli',
 				accessToken: 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA'
 			}).addTo(map);
-
+			/* 
+				Add geocoder
+			*/
+			L.mapbox.accessToken = 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA';
+			var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
 			/*
 				Global variables for the data set layer, the legend and the info box.
 			*/
@@ -233,4 +238,5 @@
 			}
 
 		</script>
+	<script src="scripts/gui.js"></script>
 </html>
