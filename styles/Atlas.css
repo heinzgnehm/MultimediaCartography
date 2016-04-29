@@ -19,7 +19,7 @@ body {
 .menubar {
   position: absolute;
   top: 0;
-  height: 35px;
+  height: 34px;
   left: 0;
   right: 0;
   background: linear-gradient(180deg, #eee, #ccc);
@@ -54,7 +54,7 @@ body {
 
 #search-results{
 	position:absolute;
-	top:21px;
+	top:35px;
 	right:40px;
   background-color: white;
   cursor:context-menu;
@@ -110,7 +110,7 @@ z-index:2;
 .menuitem {
   display: table-cell;
 }
-.collapsed-nav{
+.collapsed-navigation{
 	position: absolute;
   left: 0;
   top: 32px;
@@ -120,6 +120,7 @@ z-index:2;
   background-colr: rgb(0,0,0,1);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   visibility: hidden;
+  z-index: 1;
 	
 }
 .navigation {
@@ -128,12 +129,13 @@ z-index:2;
   top: 35px;
   right: 0;
  /* bottom: 0;*/
-  width: 280px;
+  width: 300px;
   background: #eee;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  z-index: 1;
 }
 
-.mappanel {
+.map {
   position: absolute;
   left: 0px;
   top: 32px;
@@ -170,7 +172,7 @@ iframe {
   }
 #jstree-button-tab{
 position:absolute;
-top:50px;
+top:53px;
 padding-top:34px;
 right:20px;
 height:100%;
@@ -185,9 +187,9 @@ width:50px;
 height:23px;
 }
 .jstree-button{
-height:23px;
-width:23px;
-border-radius: 50%;}
+height:23px !important; 
+width:23px !important; 
+border-radius: 50% !important; }
 .info-button{
 float:right;
 }
@@ -236,4 +238,42 @@ z-index:1;
     height:16px;
     position:absolute;
     top:-4px;
+}
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+td {
+	vertical-align: middle;
+	padding: 10px;
+	background-color: lightblue;
+	font-size: 8pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.selected {
+	background-color: darkblue;
+	color: white;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
 }
