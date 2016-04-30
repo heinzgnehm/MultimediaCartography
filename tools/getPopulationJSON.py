@@ -10,7 +10,7 @@ chicago = 0;
 
 for i in range(0, 77):
 
-	community = data['features'][i]['properties']['community'].title()
+	community = data['features'][i]['properties']['community'].title()p
 	population = data['features'][i]['properties']['tot']
 	chicago = chicago + population
 	print(community + ";" + str(population))

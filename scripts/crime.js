@@ -23,6 +23,9 @@ var chicago_crime = {
 		this.title = title;
 		this.metric = metric;
 		this.createGrades(this.dataSet);
+		//console.log("linear grades " + this.grades);
+		//this.createNonLinearGrades(this.dataSet);
+		//console.log("non-linear grades " + this.grades);
 	},
 
 	/*
@@ -55,6 +58,45 @@ var chicago_crime = {
 		this.name = this.year + ":" + this.id;
 		this.title = this.year + ":" + this.id;
 		console.log("year: " + this.year + ", id: " + this.id);
+	},
+
+	/*
+		Create 6 different non-linear classes with an equal amount of communities.
+	*/
+	createNonLinearGrades: function(data) {
+
+		// Create an array with the density of crime data (over all years and all communities).
+		var density = {};
+		for (i = 0; i < data.features.length; i++) {
+			community = data.features[i].properties.community;
+			for (j = 0; j < this.years.length; j++) {
+				category = this.years[j] + ":" + this.id;
+				value = data.features[i].properties[category].toFixed();
+				if (density[value]) {
+					density[value] = density[value] + 1;
+				} else {
+					density[value] = 1;
+				}
+			}
+		}
+
+		//console.log(density);
+		var threshold = (data.features.length * this.years.length / 8).toFixed();
+		console.log("threshold: " + threshold);
+		var keys = Object.keys(density);
+		var count = 0;
+		this.grades = [];
+		this.grades.push(0);
+		for (i = 0; i < keys.length; i++) {
+			//console.log("processing key " + keys[i] + " with value " + density[keys[i]]);
+			count = count + density[keys[i]];
+			if (count > threshold) {
+				//console.log("class at " + keys[i] + " with " + count + " members");
+				this.grades.push(keys[i]);
+				count = 0;
+			}
+		}
+		//console.log("remaining " + count);
 	},
 
 	/*
