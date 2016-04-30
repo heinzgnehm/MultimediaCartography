@@ -1,0 +1,77 @@
+Douglas;18238
+Oakland;5918
+Fuller Park;2876
+Grand Boulevard;21929
+Kenwood;17841
+Lincoln Square;39493
+Washington Park;11717
+Hyde Park;25681
+Woodlawn;25983
+Rogers Park;54991
+Jefferson Park;25448
+Forest Glen;18508
+North Park;17931
+Albany Park;51542
+Portage Park;64124
+Irving Park;53359
+Dunning;41932
+Montclare;13426
+Belmont Cragin;78743
+West Ridge;71942
+Hermosa;25010
+Avondale;39262
+Logan Square;73595
+Humboldt Park;56323
+West Town;81432
+Austin;98514
+West Garfield Park;18001
+East Garfield Park;20567
+Near West Side;54881
+North Lawndale;35912
+Uptown;56362
+South Lawndale;79288
+Lower West Side;35769
+Near South Side;21390
+Armour Square;13391
+Norwood Park;37023
+Near North Side;80484
+Loop;29283
+South Shore;49767
+Chatham;31028
+Avalon Park;10185
+South Chicago;31198
+Burnside;2916
+Calumet Heights;13812
+Roseland;44619
+North Center;31867
+Pullman;7325
+South Deering;15109
+East Side;23042
+West Pullman;29651
+Riverdale;6482
+Hegewisch;9426
+Garfield Ridge;34513
+Archer Heights;13393
+Brighton Park;45368
+Mckinley Park;15612
+Lake View;94368
+Bridgeport;31977
+New City;44377
+West Elsdon;18109
+Gage Park;39894
+Clearing;23139
+West Lawn;33355
+Chicago Lawn;55628
+West Englewood;35505
+Englewood;30654
+Greater Grand Crossing;32602
+Lincoln Park;64116
+Ashburn;41081
+Auburn Gresham;48743
+Beverly;20034
+Washington Heights;26493
+Mount Greenwood;19093
+Morgan Park;22544
+Ohare;12755
+Edgewater;56521
+Edison Park;11187
