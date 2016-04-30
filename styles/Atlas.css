@@ -300,4 +300,6 @@ background:white!important;
 {
     display:none
 }
+.no_transparent>.jstree-icon {
+filter:none !important;};
 

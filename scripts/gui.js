@@ -20,7 +20,7 @@ var navigation = {
    					                 "disabled":true
               					},
               					a_attr: {
-        					class: "no_checkbox"
+        					class: "no_checkbox no_transparent"
     						},
 						"children": [{
 								"id": "crime:HOMICIDE",
@@ -59,7 +59,7 @@ var navigation = {
    					                 "disabled":true
               					},
               					a_attr: {
-        					class: "no_checkbox"
+        					class: "no_checkbox no_transparent"
     						},						
 						"children": [
 							{"id": "ethnicity:white_p:2010", "text": "White", "icon": "icons/svg/layer.svg"},
@@ -77,7 +77,7 @@ var navigation = {
    					                 "disabled":true,
               					},
               					a_attr: {
-        					class: "no_checkbox"
+        					class: "no_checkbox no_transparent" 
     						},
 						"children": [
 							{"id": "social:hardship", "text": "Hardship Index", "icon": "icons/svg/layer.svg",},
