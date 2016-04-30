@@ -108,7 +108,7 @@
 				accessToken: 'pk.eyJ1IjoiaGVpbnpnbmVobSIsImEiOiJjaWxmYnh0M2gwMDM3dmtrcWJqdXNrcHJ2In0.LPk9jEhxzI76y48cFQLHcA'
 			}).addTo(map);
 			**/
-			/* 
+			/*
 				Add geocoder
 			*/
 			var geocoderControl = L.mapbox.geocoderControl('mapbox.places');
@@ -194,7 +194,7 @@
 				info.update = function (props) {
 
 					this._div.innerHTML = '<h4>' + dataSet.title + '</h4>' +  (props ?
-						'<b>' + props.community + '</b><br />' + dataSet.name + ': ' + props[dataSet.name] + " " + dataSet.metric
+						'<b>' + props.community + '</b><br />' + dataSet.name + ': ' + props[dataSet.name].toFixed() + " " + dataSet.metric
 						: 'Hover over a community');
 				};
 				info.addTo(map);

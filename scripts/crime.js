@@ -7,7 +7,7 @@ var chicago_crime = {
 	metric: "",
 	grades: [],
 	years: [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
-	categories: ["HOMICIDE", "THEFT", "BATTERY", "NARCOTICS", "ASSAULT", "BURGLARY", "ROBBERY"],
+	categories: ["homicide", "theft", "battery", "narcotics", "assault", "burglary", "robbery"],
 	dataSet: {},
 	dataSetLoaded: false,
 
@@ -19,7 +19,7 @@ var chicago_crime = {
 		this.name = name;
 		this.year = Number(name.slice(0, 4));
 		this.id = name.slice(5);
-		console.log("year: " + this.year + ", id: " + this.id);
+		console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
 		this.title = title;
 		this.metric = metric;
 		this.createGrades(this.dataSet);
@@ -76,6 +76,10 @@ var chicago_crime = {
 		for (i = 0; i < data.features.length ; i++) {
 			for (j = 0; j < this.years.length; j++) {
 				property = this.years[j] + ":" + this.id;
+				//community = data.features[i].properties["community"];
+				//homicide = data.features[i].properties["2003:homicide"];
+				//console.log(community + " | 2003:homicide = " + homicide);
+				//console.log("Value " + community + " | " + property + " = " + data.features[i].properties[property]);
 				if (data.features[i].properties[property] < min) {
 					min = data.features[i].properties[property];
 				}
@@ -111,14 +115,16 @@ var chicago_crime = {
 
 	getDiv: function() {
 
-		var div = L.DomUtil.create('div', 'info legend'),
+		// Creates conflict with different info CSS element, legend classes are not correctly aligned.
+		//var div = L.DomUtil.create('div', 'info legend'),
+		var div = L.DomUtil.create('div', 'legend'),
 		//grades = this.grades;
 		labels = [];
 		// loop through our density intervals and generate a label with a colored square for each interval
 		for (var i = 0; i < this.grades.length; i++) {
 			div.innerHTML +=
 			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
 		}
 		return div;
 	}

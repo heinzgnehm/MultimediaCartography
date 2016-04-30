@@ -23,31 +23,31 @@ var navigation = {
         					class: "no_checkbox no_transparent"
     						},
 						"children": [{
-								"id": "crime:HOMICIDE",
+								"id": "crime:homicide_pc",
 								"text": "Homicide",
 								"icon": "icons/svg/layer.svg",
 						}, {
-								"id": "crime:BURGLARY",
+								"id": "crime:burglary_pc",
 								"text": "Burglary",
 								"icon": "icons/svg/layer.svg",
 						}, {
-								"id": "crime:ROBBERY",
+								"id": "crime:robbery_pc",
 								"text": "Robbery",
 								"icon": "icons/svg/layer.svg",
 						}, {
-								"id": "crime:BATTERY",
+								"id": "crime:battery_pc",
 								"text": "Battery",
 								"icon": "icons/svg/layer.svg",
 						}, {
-								"id": "crime:THEFT",
+								"id": "crime:theft_pc",
 								"text": "Theft",
 								"icon": "icons/svg/layer.svg",
 						}, {
-								"id": "crime:ASSAULT",
+								"id": "crime:assault_pc",
 								"text": "Assault",
 								"icon": "icons/svg/layer.svg",
 						}, {
-								"id": "crime:NARCOTICS",
+								"id": "crime:narcotics_pc",
 								"text": "Narcotics",
 								"icon": "icons/svg/layer.svg",
 						}],
@@ -60,7 +60,7 @@ var navigation = {
               					},
               					a_attr: {
         					class: "no_checkbox no_transparent"
-    						},						
+    						},
 						"children": [
 							{"id": "ethnicity:white_p:2010", "text": "White", "icon": "icons/svg/layer.svg"},
 							{"id": "ethnicity:black_p:2010", "text": "Black", "icon": "icons/svg/layer.svg",},
@@ -77,7 +77,7 @@ var navigation = {
    					                 "disabled":true,
               					},
               					a_attr: {
-        					class: "no_checkbox no_transparent" 
+        					class: "no_checkbox no_transparent"
     						},
 						"children": [
 							{"id": "social:hardship", "text": "Hardship Index", "icon": "icons/svg/layer.svg",},
@@ -125,7 +125,7 @@ var navigation = {
 					for (i=0;i<data.selected.length-1;i++){
 					$('#layers-tree').jstree(true).deselect_node(data.selected[i]);
 					}}
-				
+
 
 				/*
 						The id identifies the chosen data set.
@@ -143,8 +143,8 @@ var navigation = {
 				}
 				console.log("chosen Year on slider is " + year);
 				switch (dataSet) {
-					case "crime":     showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); showSlider(); break;
-					case "ethnicity": showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); hideSlider(); break;
+					case "crime":     showDataSet(dataSet, year + ":" + category, year + ":" + category, " per 100 000 people"); showSlider(); break;
+					case "ethnicity": showDataSet(dataSet, year + ":" + category, year + ":" + category, " percent"); hideSlider(); break;
 					case "social":    showDataSet(dataSet, category, category, ""); hideSlider(); break;
 					//case 1: console.log("Show sub-menu"); break;
 					//case 2: showDataSet(dataSet, category, category, ""); break;
@@ -153,8 +153,8 @@ var navigation = {
 			});
 
 		});
-		
-		
+
+
 
 		$('#collapse-left').button().click(function() {
 				$('.navigation').css("visibility", "hidden");
@@ -196,12 +196,12 @@ var navigation = {
 		$('#fullscreen').button().click(function(event) {
    			 var element = document.querySelector('body');
    			 toggleFullscreen(element);
- 
+
 		});
 		/* home button event and layover */
 		$('#home-map').button().click(function(event) {
    			 map.setView([41.8369, -87.6847], 11);
- 
+
 		});
 		$('#home-map').button().hover(function(){$(this).removeClass("home-map").addClass("home-map-mouseover")}
 					     ,function(){$(this).removeClass("home-map-mouseover").addClass("home-map")});
@@ -277,7 +277,7 @@ $('#menu-1,#menu-2').menu();
 			$('.slider-container').css("z-index", "0");
 		}
 
-/* the fuction take the text in the search field make a query to the mapbox geocoder, 
+/* the fuction take the text in the search field make a query to the mapbox geocoder,
 display only four result and when clicked on the result zoom either to its bbox (if present) or to its center*/
 function geocodeThis() {
     var text = document.getElementById('search').value;
@@ -318,7 +318,7 @@ function geocodeThis() {
 							{labels.splice(-1,1);}
 						else {}
 						var label=labels.join(',');
-						
+
                         var newinstance = "<div class=\"address-result\" id=\"add-res" + i + "\">" + label+ "</div>";
                         $("#search-results").append(newinstance);
                         showCount++;
@@ -450,7 +450,7 @@ function refreshinfo(data) {
         text: false
     });
 };
-/** create the initilas info buttons 
+/** create the initilas info buttons
 
  * @param {json} data: initial tree data
  */
