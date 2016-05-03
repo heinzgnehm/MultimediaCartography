@@ -53,6 +53,23 @@ var chicago_crime = {
 		return this.categories;
 	},
 
+	getChartData: function(community, crime) {
+		var index;
+		for (i = 0; i < this.dataSet.features.length; i++) {
+			if (community == this.dataSet.features[i].properties.community) {
+				index = i;
+				console.log("found community " + community + " at index " + index);
+				break;
+			}
+		}
+		data = {};
+		for (i = 0; i < this.years.length; i++) {
+			var category = this.years[i] + ":" + crime;
+			data[this.years[i]] = this.dataSet.features[index].properties[category];
+		}
+		return data;
+	},
+
   setYear(year) {
 		this.year = Math.floor(year);
 		this.name = this.year + ":" + this.id;

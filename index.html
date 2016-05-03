@@ -192,7 +192,6 @@
 
 				// method that we will use to update the control based on feature properties passed
 				info.update = function (props) {
-
 					this._div.innerHTML = '<h4>' + dataSet.title + '</h4>' +  (props ?
 						'<b>' + props.community + '</b><br />' + dataSet.name + ': ' + props[dataSet.name].toFixed() + " " + dataSet.metric
 						: 'Hover over a community');

@@ -4,6 +4,7 @@ var chicago_ethnicity = {
 	title: "",
 	metric: "",
 	grades: [],
+	categories: ["white", "black", "native", "asian", "mix", "islander", "other"],
 	dataSet: {},
 	dataSetLoaded: false,
 
@@ -33,6 +34,22 @@ var chicago_ethnicity = {
 	*/
 	getDataSet: function() {
 		return this.dataSet;
+	},
+
+	getChartData: function(community) {
+		var index;
+		for (i = 0; i < this.dataSet.features.length; i++) {
+			if (community == this.dataSet.features[i].properties.community) {
+				index = i;
+				console.log("found community " + community + " at index " + index);
+				break;
+			}
+		}
+		data = {};
+		for (i = 0; i < this.categories.length; i++) {
+			data[this.categories[i]] = this.dataSet.features[index].properties["2010:" + this.categories[i]];
+		}
+		return data;
 	},
 
 	/*
