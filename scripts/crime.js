@@ -55,7 +55,7 @@ var chicago_crime = {
 	getCategories: function() {
 		return this.categories;
 	},
-
+	
 	/*
 		Get an array with yearly crime data for displaying a time series line chart.
 	*/
