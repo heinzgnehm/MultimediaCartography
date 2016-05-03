@@ -11,6 +11,9 @@ var chicago_crime = {
 	dataSet: {},
 	dataSetLoaded: false,
 
+	/*
+		Initialize the crime data set and load the JSON file if it is not already loaded.
+	*/
 	init: function(name, title, metric) {
 		if (!this.dataSetLoaded) {
 			this.dataSet = this.loadDataSet("data/crime.geojson");
