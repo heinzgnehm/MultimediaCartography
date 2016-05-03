@@ -36,6 +36,9 @@ var chicago_ethnicity = {
 		return this.dataSet;
 	},
 
+	/*
+		Get an array with the ethnic mix of a community for displaying a pie chart.
+	*/
 	getChartData: function(community) {
 		var index;
 		for (i = 0; i < this.dataSet.features.length; i++) {

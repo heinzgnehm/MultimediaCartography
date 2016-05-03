@@ -53,6 +53,9 @@ var chicago_crime = {
 		return this.categories;
 	},
 
+	/*
+		Get an array with yearly crime data for displaying a time series line chart.
+	*/
 	getChartData: function(community, crime) {
 		var index;
 		for (i = 0; i < this.dataSet.features.length; i++) {
