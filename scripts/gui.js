@@ -111,10 +111,23 @@ var navigation = {
 		*/
 		$(function () {
 			$('#layers-tree').jstree(navigation);
+			//create buttons
 			infocreate(navigation);
-			$("#layers-tree").bind("loaded.jstree", function(event, data) {
+			// initilize searchin function
+			var to = false;
+			$('#search-layer').keyup(function() {
+        			if (to) {
+            				clearTimeout(to);
+        				}
+        			to = setTimeout(function() {
+           				var v = $('#search-layer').val();
+           				$('#layers-tree').jstree(true).search(v);
+       				}, 250);
+   			 });
+			/*$("#layers-tree").bind("loaded.jstree", function(event, data) {
    					$('.lvl1').find('ins.jstree-checkbox').hide();
-					}).jstree({});
+					}).jstree({});*/
+			
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
 				console.log(e);
 				console.log(data);
