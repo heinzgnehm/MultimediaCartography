@@ -453,8 +453,8 @@ function refreshinfo(data) {
 		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
 		    	}
 		    
-		    $('#dialog').dialog({
-                        title: id,
+		    $('#bar-graph').dialog({
+                        title: '',
                         position: {
                         	my: "left top",
                         	at: "right top",
@@ -466,7 +466,7 @@ function refreshinfo(data) {
                         width: $(window).width()-330,
                          
                     });
-                    $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
+                    $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
                 });
             }
