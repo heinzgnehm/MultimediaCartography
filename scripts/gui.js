@@ -444,6 +444,10 @@ function refreshinfo(data) {
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
 		    // to do toglle bar graph
+		    $('#dialog').dialog({
+                        title: id
+                    });
+                    $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
                 });
             }
@@ -511,6 +515,10 @@ function infocreate(data) {
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
 		    // to do toglle bar graph
+		    $('#dialog').dialog({
+                        title: id
+                    });
+                    $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
                 });
             }
