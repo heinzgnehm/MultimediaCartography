@@ -444,8 +444,19 @@ function refreshinfo(data) {
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
 		    // to do toglle bar graph
+		    console.log($(document).height());
 		    $('#dialog').dialog({
-                        title: id
+                        title: id,
+                        position: {
+                        	my: "left top",
+                        	at: "right top",
+                        	of: ".navigation",
+                        	collision: 'none',
+                        	
+                        },
+                        height: $(document).height()-33-105,
+                        width: $(document).width()-330,
+                         
                     });
                     $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
@@ -516,7 +527,16 @@ function infocreate(data) {
                     id = event.target.getAttribute('id');
 		    // to do toglle bar graph
 		    $('#dialog').dialog({
-                        title: id
+                        title: id,
+                         position: {
+                        	my: "left top",
+                        	at: "right top",
+                        	of: ".navigation",
+                        	collision: 'none',
+                        	
+                        },
+                        height: $(document).height()-33-105,
+                        width: $(document).width()-330,
                     });
                     $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
