@@ -1,0 +1,19 @@
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: px;
+  color: black;
+  background: white;
+  -ms-transform: scale(0.7); /* IE 9 */
+  -webkit-transform: scale(0.7); /* Chrome, Safari, Opera */
+  transform: scale(0.7);
+}
+
+a:link {
+  color: #05d;
+  text-decoration: none
+}
+
+a:visited {
+  color: #7af;
+  text-decoration: none
+}
