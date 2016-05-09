@@ -462,8 +462,8 @@ function refreshinfo(data) {
                         	collision: 'none',
                         	
                         },
-                        height: $(document).height()-33-105,
-                        width: $(document).width()-330,
+                        height: $(window).height()-33-105,
+                        width: $(window).width()-330,
                          
                     });
                     $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
@@ -544,8 +544,8 @@ function infocreate(data) {
                         	collision: 'none',
                         	
                         },
-                        height: $(document).height()-33-105,
-                        width: $(document).width()-330,
+                        height: $(window).height()-33-105,
+                        width: $(window).width()-330,
                     });
                     $('#dialogframe').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
