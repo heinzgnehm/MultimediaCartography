@@ -2,20 +2,23 @@ var chicago_ethnicity = {
 
 	name: "",
 	title: "",
-	metric: "",
+	id: "",
+	unit: "",
 	grades: [],
 	categories: ["white", "black", "native", "asian", "mix", "islander", "other"],
 	dataSet: {},
 	dataSetLoaded: false,
 
-	init: function(name, title, metric) {
+	init: function(name) {
 		if (this.dataSet != undefined) {
 			this.dataSet = this.loadDataSet("data/ethnicity.geojson");
 			this.dataSetLoaded = true;
 		}
+		this.id = name.slice(5);
+		console.log("ethnicity.js:init: id = " + this.id);
 		this.name = name;
-		this.title = title;
-		this.metric = "%";
+		this.title = metadata[this.id].title;
+		this.unit = metadata[this.id].unit;
 		this.createGrades(this.dataSet);
 	},
 

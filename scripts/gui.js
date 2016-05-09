@@ -127,7 +127,7 @@ var navigation = {
 			/*$("#layers-tree").bind("loaded.jstree", function(event, data) {
    					$('.lvl1').find('ins.jstree-checkbox').hide();
 					}).jstree({});*/
-			
+
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
 				console.log(e);
 				console.log(data);
@@ -156,9 +156,9 @@ var navigation = {
 				}
 				console.log("chosen Year on slider is " + year);
 				switch (dataSet) {
-					case "crime":     showDataSet(dataSet, year + ":" + category, year + ":" + category, " per 100 000 people"); showSlider(); break;
-					case "ethnicity": showDataSet(dataSet, year + ":" + category, year + ":" + category, " percent"); hideSlider(); break;
-					case "social":    showDataSet(dataSet, category, category, ""); hideSlider(); break;
+					case "crime":     showDataSet(dataSet, year + ":" + category); showSlider(); break;
+					case "ethnicity": showDataSet(dataSet, year + ":" + category); hideSlider(); break;
+					case "social":    showDataSet(dataSet, category); hideSlider(); break;
 					//case 1: console.log("Show sub-menu"); break;
 					//case 2: showDataSet(dataSet, category, category, ""); break;
 					//case 3: showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); break;

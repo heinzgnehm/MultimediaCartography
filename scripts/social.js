@@ -2,19 +2,19 @@ var chicago_social = {
 
 	name: "",
 	title: "",
-	metric: "",
+	unit: "",
 	grades: [],
 	dataSet: {},
 	dataSetLoaded: false,
 
-	init: function(name, title, metric) {
+	init: function(name) {
 		if (this.dataSet != undefined) {
 			this.dataSet = this.loadDataSet("data/social.geojson");
 			this.dataSetLoaded = true;
 		}
 		this.name = name;
-		this.title = title;
-		this.metric = metric;
+		this.title = metadata[name].title;
+		this.unit = metadata[name].unit;
 		this.createGrades(this.dataSet);
 	},
 
