@@ -443,8 +443,16 @@ function refreshinfo(data) {
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
-		    // to do toglle bar graph
-		    console.log($(document).height());
+                    console.log(id);
+		    if (id.split('-')[0]=="crime"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    if (id.split('-')[0]=="ethnicity"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    
 		    $('#dialog').dialog({
                         title: id,
                         position: {
@@ -526,6 +534,7 @@ function infocreate(data) {
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
 		    // to do toglle bar graph
+		    console.log(values[handle])
 		    $('#dialog').dialog({
                         title: id,
                          position: {

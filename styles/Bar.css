@@ -1,11 +1,11 @@
 body {
   font-family: 'Helvetica Neue', sans-serif;
-  margin: px;
   color: black;
   background: white;
-  -ms-transform: scale(0.7); /* IE 9 */
-  -webkit-transform: scale(0.7); /* Chrome, Safari, Opera */
-  transform: scale(0.7);
+  -ms-transform: scale(0.8); /* IE 9 */
+  -webkit-transform: scale(0.8); /* Chrome, Safari, Opera */
+  transform: scale(0.8);
+  margin: 10px;
 }
 
 a:link {
