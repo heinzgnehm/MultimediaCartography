@@ -278,6 +278,7 @@ $('#menu-1,#menu-2').menu();
 			slider.noUiSlider.on('change', function (values, handle) {
 			console.log("slider changed to " + values[handle]);
 			showYear(values[handle]);
+			updateBarGraph();
 		});
 
 		function showSlider() {
@@ -443,7 +444,31 @@ function refreshinfo(data) {
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
-		    // to do toglle bar graph
+                    console.log(id);
+		    if (id.split('-')[0]=="crime"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    if (id.split('-')[0]=="ethnicity"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    
+		    $('#bar-graph').dialog({
+                        title: 'Bar Graph',
+                        name: id,
+                        position: {
+                        	my: "left top",
+                        	at: "right top",
+                        	of: ".navigation",
+                        	collision: 'none',
+                        	
+                        },
+                        height: $(window).height()-33-105,
+                        width: $(window).width()-330,
+                         
+                    });
+                    $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
                 });
             }
@@ -510,7 +535,31 @@ function infocreate(data) {
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
                     id = event.target.getAttribute('id');
-		    // to do toglle bar graph
+                    console.log(id);
+		    if (id.split('-')[0]=="crime"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    if (id.split('-')[0]=="ethnicity"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    
+		    $('#bar-graph').dialog({
+                        title: 'Bar Graph',
+                        name: id,
+                        position: {
+                        	my: "left top",
+                        	at: "right top",
+                        	of: ".navigation",
+                        	collision: 'none',
+                        	
+                        },
+                        height: $(window).height()-33-105,
+                        width: $(window).width()-330,
+                         
+                    });
+                    $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
                 });
             }
@@ -558,6 +607,36 @@ $('#layers-tree')
         console.log("hheee");
         refreshinfo($("#layers-tree").jstree(true)._model.data);
     })
+    
+/*** update the bar graph when year is changed ***/
+function updateBarGraph(){
+if ($('#bar-graph').dialog('isOpen')==true){
+	//console.log($('#bar-graph').dialog("option"));
+	id =$('#bar-graph').dialog("option").name;
+	if (id.split('-')[0]=='crime'){
+		year=parseInt(slider.noUiSlider.get());
+		id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1].split(':')[1]+'-'+id.split('-')[2];
+		$('#bar-graph').dialog({
+                        title: 'Bar Graph',
+                        name: id,
+                        position: {
+                        	my: "left top",
+                        	at: "right top",
+                        	of: ".navigation",
+                        	collision: 'none',
+                        	
+                        },
+                        height: $(window).height()-33-105,
+                        width: $(window).width()-330,
+                         
+                    });
+                    $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
+		
+	}
+	
+	}
+
+}
 
 /*** Toggle full screen function ***/
 function toggleFullscreen(elem) {
