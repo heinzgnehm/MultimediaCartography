@@ -464,7 +464,7 @@ function refreshinfo(data) {
                         	collision: 'none',
                         	
                         },
-                        height: $(window).height()-33-105,
+                        height: $(window).height()-38-105,
                         width: $(window).width()-330,
                          
                     });
@@ -555,7 +555,7 @@ function infocreate(data) {
                         	collision: 'none',
                         	
                         },
-                        height: $(window).height()-33-105,
+                        height: $(window).height()-38-105,
                         width: $(window).width()-330,
                          
                     });
@@ -626,7 +626,7 @@ if ($('#bar-graph').dialog('isOpen')==true){
                         	collision: 'none',
                         	
                         },
-                        height: $(window).height()-33-105,
+                        height: $(window).height()-38-105,
                         width: $(window).width()-330,
                          
                     });
