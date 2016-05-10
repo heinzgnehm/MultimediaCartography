@@ -41,6 +41,12 @@ body {
 	width: 25px;
 	border-radius: 50%;
 }
+#landing{
+	margin:4px 5px 4px 5px;
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+}
 #about{
 	margin:4px 5px 4px 5px;
 }
@@ -235,7 +241,9 @@ bottom:50px;
 left:300px;
 z-index:1;
 zoom: 0.9;
--moz-transform: scale(0.9);}
+-ms-transform: scale(0.8); /* IE 9 */
+-webkit-transform: scale(0.8); /* Chrome, Safari, Opera */
+transform: scale(0.8);}
 /*
 .ui-slider-tick-mark{
     display:inline-block;

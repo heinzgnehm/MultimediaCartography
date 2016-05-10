@@ -211,6 +211,10 @@ var navigation = {
    			 toggleFullscreen(element);
 
 		});
+		$('#landing').button().click(function(event) {
+   			 $("body").load("landing.html");
+
+		});
 		/* home button event and layover */
 		$('#home-map').button().click(function(event) {
    			 map.setView([41.8369, -87.6847], 11);
@@ -222,6 +226,12 @@ var navigation = {
 		$("#fullscreen").button({
 		    icons: {
 		        primary: "ui-icon-arrow-4-diag"
+		    },
+		    text: false
+		});
+		$("#landing").button({
+		    icons: {
+		        primary: "ui-icon-home"
 		    },
 		    text: false
 		});
