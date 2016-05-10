@@ -292,7 +292,8 @@ td {
 	bottom: 100px;
 	/*background:white !important; /*#F7F7F7*/
 	border: 0px solid #ccc !important;
-	background-image: url(../icons/svg/home.svg) !important;
+	background-image: url(../icons/svg/dot-circle.svg) !important;
+	background-size: contain !important;
 	box-shadow: 0px 0px 5px 0.5px #666;
 	border-radius: 3px !important;	
 }
@@ -308,4 +309,8 @@ background:white!important;
 }
 .no_transparent>.jstree-icon {
 filter:none !important;};
+
+.fa-custom-dot{
+    font-size:2em !important;
+}
 
