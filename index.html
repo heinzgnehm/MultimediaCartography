@@ -84,6 +84,7 @@
 		<button id="home-map" class="home-map" ></button> <!--class="ui-btn ui-shadow ui-corner-all"-->
 
 	</body>
+	<script src="scripts/metadata.js"></script>
 	<script src="scripts/social.js"></script>
 	<script src="scripts/crime.js"></script>
 	<script src="scripts/ethnicity.js"></script>
@@ -128,7 +129,7 @@
 			/*
 				Show the selected data set on the base map.
 			*/
-			function showDataSet(data, name, title, metric) {
+			function showDataSet(data, name) {
 
 				switch(data) {
 					case 'social': chosenDataSet = chicago_social; break;
@@ -136,7 +137,7 @@
 					case 'ethnicity': chosenDataSet = chicago_ethnicity; break;
 				}
 
-				chosenDataSet.init(name, title, metric);
+				chosenDataSet.init(name);
 				showDataLayer(chosenDataSet);
 				showLegend(chosenDataSet);
 				showInfo(chosenDataSet);
@@ -198,7 +199,7 @@
 				// method that we will use to update the control based on feature properties passed
 				info.update = function (props) {
 					this._div.innerHTML = '<h4>' + dataSet.title + '</h4>' +  (props ?
-						'<b>' + props.community + '</b><br />' + dataSet.name + ': ' + props[dataSet.name].toFixed() + " " + dataSet.metric
+						'<b>' + props.community + '</b><br />' + props[dataSet.name].toFixed() + " " + dataSet.unit
 						: 'Hover over a community');
 				};
 				info.addTo(map);

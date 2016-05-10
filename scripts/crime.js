@@ -4,7 +4,7 @@ var chicago_crime = {
 	year: 0,
 	id: "",
 	title: "",
-	metric: "",
+	unit: "",
 	grades: [],
 	years: [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
 	categories: ["homicide", "theft", "battery", "narcotics", "assault", "burglary", "robbery"],
@@ -14,7 +14,7 @@ var chicago_crime = {
 	/*
 		Initialize the crime data set and load the JSON file if it is not already loaded.
 	*/
-	init: function(name, title, metric) {
+	init: function(name) {
 		if (!this.dataSetLoaded) {
 			this.dataSet = this.loadDataSet("data/crime.geojson");
 			this.dataSetLoaded = true;
@@ -23,8 +23,8 @@ var chicago_crime = {
 		this.year = Number(name.slice(0, 4));
 		this.id = name.slice(5);
 		console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
-		this.title = title;
-		this.metric = metric;
+		this.title = metadata[this.id].title;
+		this.unit = metadata[this.id].unit;
 		this.createGrades(this.dataSet);
 		//console.log("linear grades " + this.grades);
 		//this.createNonLinearGrades(this.dataSet);
@@ -55,7 +55,7 @@ var chicago_crime = {
 	getCategories: function() {
 		return this.categories;
 	},
-	
+
 	/*
 		Get an array with yearly crime data for displaying a time series line chart.
 	*/
