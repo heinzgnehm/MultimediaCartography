@@ -19,19 +19,20 @@ body {
 .menubar {
   position: absolute;
   top: 0;
-  height: 34px;
+  height: 38px;
   left: 0;
   right: 0;
   background: linear-gradient(180deg, #eee, #ccc);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  border-bottom: 1px solid #aaaaaa;
 }
 
 #title{
-	margin:4px 10px 4px 10px;
-	padding: 20px 30px 0px 30px;
+	margin:6px 10px 2px 10px;
+	padding: 0px 30px 0px 30px;
 	font-weight: bold;
 	font-size: 120%;
-	color:#2779aa;
+	color:#222222;
 	
 }
 #fullscreen{
@@ -49,7 +50,7 @@ body {
 
 #search{position: absolute;
   right: 40px;
-  top:4px;
+  top:2px;
   }
 
 #search-results{
@@ -58,13 +59,13 @@ body {
 	right:40px;
   background-color: white;
   cursor:context-menu;
-  border:1px solid #aed0ea;
+  border:1px solid #dddddd;
   /*width:300px;*/
    visibility: hidden;
 z-index:2;
   }
 .address-result{
-	border:0.5px solid #aed0ea;
+	border:0.5px solid #dddddd;
 	font-size:medium;
 	padding:1px 10px 1px 10px;
 	z-index:1000;
@@ -118,7 +119,7 @@ z-index:2;
 .collapsed-navigation{
 	position: absolute;
   left: 0;
-  top: 32px;
+  top: 35px;
   right: 0;
   width: 30px;
   height: 30px;
@@ -131,7 +132,7 @@ z-index:2;
 .navigation {
   position: absolute;
   left: 0;
-  top: 35px;
+  top: 42px;
   right: 0;
  /* bottom: 0;*/
   width: 320px;
@@ -143,7 +144,7 @@ z-index:2;
 .map {
   position: absolute;
   left: 0px;
-  top: 32px;
+  top: 39px;
   right: 0;
   bottom: 0px;
   background: #fff;
@@ -177,7 +178,7 @@ iframe {
   }
 #jstree-button-tab{
 position:absolute;
-top:53px;
+top:55px;
 padding-top:34px;
 right:20px;
 height:100%;

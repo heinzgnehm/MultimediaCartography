@@ -342,7 +342,7 @@ function geocodeThis() {
                         })
                         $("#add-res" + i).click(function() {
                             $(".address-result").css("background-color", "white");
-                            $(this).css("background-color", "#e4eff8");
+                            $(this).css("background-color", "#eeeeee");
                             //console.log("hey");
                             //console.log($(this).data("bbox"));
                             if ($(this).data("bbox")) {
