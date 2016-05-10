@@ -467,8 +467,10 @@ function refreshinfo(data) {
                 });
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
-		    $('.graph-panel').css("width","400px");
-		    $('.map').css("right","398px");
+		    var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
+		    console.log(graphPanelWidth);
+		    $('.graph-panel').css("width",graphPanelWidth.toString()+"px");
+		    $('.map').css("right",(graphPanelWidth-2).toString()+"px");
                     id = event.target.getAttribute('id');
                     console.log(id);
 		    if (id.split('-')[0]=="crime"){
@@ -479,8 +481,8 @@ function refreshinfo(data) {
 		    	year=parseInt(slider.noUiSlider.get());
 		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
 		    	}
-		    $(".graph-tab").scroll();
-		    $(".graph-tab").load('graph/BarGraphSort.html?id='+ id);
+		    showBarGraph(id);
+		    //$(".graph-tab").load('graph/BarGraphSort.html?id='+ id);
 		    /*$('#bar-graph').dialog({
                         title: 'Bar Graph',
                         name: id,
