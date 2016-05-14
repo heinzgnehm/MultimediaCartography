@@ -71,7 +71,7 @@ var navigation = {
 				},
 				{
 						"id": "social",
-						"text": "Social-economic indicators",
+						"text": "Socioeconomic indicators",
  						"state": {
    					                 "opened": false,
    					                 "disabled":true,
@@ -85,6 +85,7 @@ var navigation = {
 							{"id": "social:poverty", "text": "Poverty", "icon": "icons/svg/layer.svg",},
 							{"id": "social:income", "text": "Income", "icon": "icons/svg/layer.svg",},
 							{"id": "social:diploma", "text": "Education", "icon": "icons/svg/layer.svg",},
+							{"id": "social:unemployed", "text": "Unemployment", "icon": "icons/svg/layer.svg",},
 							{"id": "social:notWorkingAge", "text": "Dependence", "icon": "icons/svg/layer.svg",},
 						],
 				}]
@@ -175,7 +176,7 @@ var navigation = {
 				//$('#map').css("visibility", "visible");
 		    //$('.mappanel').css("left","30px");
 		});
-		
+
 		$('#close-panel').button().click(function() {
 				console.log('iiiii');
 				$('.graph-panel').css("width", "0");
@@ -208,7 +209,8 @@ var navigation = {
 		});
 
 		$('#description').button().click(function() {
-			var url = $('#mapframe').prop('src').replace(/Maps\//, 'Descriptions/').replace(/\..*$/, '.html');
+			var url = "info/info.html";
+			//var url = $('#mapframe').prop('src').replace(/Maps\//, 'Descriptions/').replace(/\..*$/, '.html');
 			$('#dialog').dialog({
 				title: 'Map Description'
 			});
@@ -440,7 +442,9 @@ function refreshinfo(data) {
             $('#dialog').dialog({
                 title: id
             });
-            $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+						$('#dialogframe').prop('src', 'info/info.html#' + id);
+						console.log("gui.js > refreshinfo() > top: call info page at info/info.html#" + id);
+            //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
             event.preventDefault();
         });
         if (data[folder].state.opened == true) {
@@ -462,7 +466,10 @@ function refreshinfo(data) {
                     $('#dialog').dialog({
                         title: id
                     });
-                    $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+										//$('#dialogframe').prop('src', 'info/info.html#' + id);
+										$('#dialogframe').prop('src', 'info/info.html#' + id);
+										console.log("gui.js > refreshinfo() > bottom: call info page at info/info.html#" + id);
+                    //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
                     event.preventDefault();
                 });
 		// bar button clicl event
@@ -491,11 +498,11 @@ function refreshinfo(data) {
                         	at: "right top",
                         	of: ".navigation",
                         	collision: 'none',
-                        	
+
                         },
                         height: $(window).height()-38-105,
                         width: $(window).width()-330,
-                         
+
                     });
                     $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);*/
                     event.preventDefault();
@@ -539,7 +546,9 @@ function infocreate(data) {
             $('#dialog').dialog({
                 title: id
             });
-            $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+						$('#dialogframe').prop('src', 'info/info.html#' + id);
+						console.log("gui.js > infocreate() > top: call info page at info/info.html#" + id);
+						//$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
             event.preventDefault();
         });
         if (data[i].state.opened == true) {
@@ -558,7 +567,9 @@ function infocreate(data) {
                     $('#dialog').dialog({
                         title: id
                     });
-                    $('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+										$('#dialogframe').prop('src', 'info/info.html#' + id);
+										console.log("gui.js > infocreate() > bottom: call info page at info/info.html#" + id);
+                    //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
                     event.preventDefault();
                 });
 		// bar button clicl event
@@ -573,7 +584,7 @@ function infocreate(data) {
 		    	year=parseInt(slider.noUiSlider.get());
 		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
 		    	}
-		    
+
 		    $('#bar-graph').dialog({
                         title: 'Bar Graph',
                         name: id,
@@ -582,11 +593,11 @@ function infocreate(data) {
                         	at: "right top",
                         	of: ".navigation",
                         	collision: 'none',
-                        	
+
                         },
                         height: $(window).height()-38-105,
                         width: $(window).width()-330,
-                         
+
                     });
                     $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
                     event.preventDefault();
@@ -636,7 +647,7 @@ $('#layers-tree')
         console.log("hheee");
         refreshinfo($("#layers-tree").jstree(true)._model.data);
     })
-    
+
 /*** update the bar graph when year is changed ***/
 function updateBarGraph(){
 if ($('#bar-graph').dialog('isOpen')==true){
@@ -653,16 +664,16 @@ if ($('#bar-graph').dialog('isOpen')==true){
                         	at: "right top",
                         	of: ".navigation",
                         	collision: 'none',
-                        	
+
                         },
                         height: $(window).height()-38-105,
                         width: $(window).width()-330,
-                         
+
                     });
                     $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
-		
+
 	}
-	
+
 	}
 
 }

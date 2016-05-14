@@ -64,11 +64,15 @@ var metadata = {
 		"unit": " USD"
 	},
 	"diploma": {
-		"title": "Persons without a college degree",
+		"title": "Persons 25+ without a high school diploma",
+		"unit": " percent"
+	},
+	"unemployed": {
+		"title": "Persons 16+ in the labor force that are unemployed",
 		"unit": " percent"
 	},
 	"notWorkingAge": {
-		"title": "People aged below 16 and above 65",
+		"title": "People aged below 18 and above 64",
 		"unit": " percent"
 	}
 }
