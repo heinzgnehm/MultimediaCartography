@@ -4,7 +4,7 @@ var chicago_ethnicity = {
 	title: "",
 	id: "",
 	unit: "",
-	grades: [],
+	grades: [0, 20, 40, 60, 80],
 	categories: ["white", "black", "native", "asian", "mix", "islander", "other"],
 	dataSet: {},
 	dataSetLoaded: false,
@@ -19,7 +19,8 @@ var chicago_ethnicity = {
 		this.name = name;
 		this.title = metadata[this.id].title;
 		this.unit = metadata[this.id].unit;
-		this.createGrades(this.dataSet);
+		//this.createGrades(this.dataSet);
+		console.log("ethnicity.js:init: grades = " + this.grades);
 	},
 
 	/*
@@ -94,14 +95,14 @@ var chicago_ethnicity = {
 
 	getColor: function(d) {
 
-			return 	d > this.grades[7] ? '#800026' :
-							d > this.grades[6] ? '#BD0026' :
-							d > this.grades[5] ? '#E31A1C' :
-							d > this.grades[4] ? '#FC4E2A' :
-							d > this.grades[3] ? '#FD8D3C' :
-							d > this.grades[2] ? '#FEB24C' :
-							d > this.grades[1] ? '#FED976' :
-																	'#FFEDA0';
+			color = colorbrewer.BuPu[this.grades.length];
+
+			for (var i = this.grades.length - 1; i > 0; i--) {
+				if (d > this.grades[i]) {
+					return color[i];
+				}
+			}
+			return color[0];
 	},
 
 	getDiv: function() {
@@ -126,7 +127,7 @@ var chicago_ethnicity = {
 		for (var i = 0; i < this.grades.length; i++) {
 			legend +=
 			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
 		}
 		return legend;
 	}

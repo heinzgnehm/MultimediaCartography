@@ -25,10 +25,10 @@ var chicago_crime = {
 		console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
 		this.title = metadata[this.id].title;
 		this.unit = metadata[this.id].unit;
-		this.createGrades(this.dataSet);
+		//this.createGrades(this.dataSet);
 		//console.log("linear grades " + this.grades);
-		//this.createNonLinearGrades(this.dataSet);
-		//console.log("non-linear grades " + this.grades);
+		this.createNonLinearGrades(this.dataSet, 4);
+		console.log("non-linear grades " + this.grades);
 	},
 
 	/*
@@ -86,7 +86,7 @@ var chicago_crime = {
 	/*
 		Create 6 different non-linear classes with an equal amount of communities.
 	*/
-	createNonLinearGrades: function(data) {
+	createNonLinearGrades: function(data, steps) {
 
 		// Create an array with the density of crime data (over all years and all communities).
 		var density = {};
@@ -104,13 +104,14 @@ var chicago_crime = {
 		}
 
 		//console.log(density);
-		var threshold = (data.features.length * this.years.length / 8).toFixed();
+		var threshold = (data.features.length * this.years.length / steps).toFixed();
 		console.log("threshold: " + threshold);
 		var keys = Object.keys(density);
 		var count = 0;
 		this.grades = [];
 		this.grades.push(0);
-		for (i = 0; i < keys.length; i++) {
+		count = count + density[keys[0]];
+		for (i = 1; i < keys.length; i++) {
 			//console.log("processing key " + keys[i] + " with value " + density[keys[i]]);
 			count = count + density[keys[i]];
 			if (count > threshold) {
@@ -128,10 +129,10 @@ var chicago_crime = {
 	createGrades: function(data) {
 		var min = this.min(data);
 		var max = this.max(data);
-		var step = Math.round((max - min) / 8);
+		var step = Math.round((max - min) / 3);
 		console.log("min: " + min + ", max: " + max + ", step: " + step);
 		this.grades = [];
-		for (i = 0; i <= 8; i++) {
+		for (i = 0; i <= 3; i++) {
 			this.grades.push(i * step);
 		}
 	},
@@ -168,30 +169,14 @@ var chicago_crime = {
 
 	getColor: function(d) {
 
-			color = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
+			color = colorbrewer.Oranges[this.grades.length];
 
-			for (var i = 7; i > 0; i--) {
+			for (var i = this.grades.length - 1; i > 0; i--) {
 				if (d > this.grades[i]) {
 					return color[i];
 				}
 			}
 			return color[0];
-	},
-
-	getDiv: function() {
-
-		// Creates conflict with different info CSS element, legend classes are not correctly aligned.
-		//var div = L.DomUtil.create('div', 'info legend'),
-		var div = L.DomUtil.create('div', 'legend'),
-		//grades = this.grades;
-		labels = [];
-		// loop through our density intervals and generate a label with a colored square for each interval
-		for (var i = 0; i < this.grades.length; i++) {
-			div.innerHTML +=
-			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
-		}
-		return div;
 	},
 
 	getLegend: function() {
@@ -203,9 +188,14 @@ var chicago_crime = {
 		labels = [];
 		// loop through our density intervals and generate a label with a colored square for each interval
 		for (var i = 0; i < this.grades.length; i++) {
+			var gradePlusOne = parseInt(this.grades[i]) + 1;
+			console.log("crime.js > getLegend(): grade " + i + " | value " + gradePlusOne + " | color " + (this.getColor(gradePlusOne)));
 			legend +=
-			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
+			'<i style="background:' + this.getColor(gradePlusOne) + '"></i> ' +
 			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
+			//legend +=
+			//'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
+			//this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
 		}
 		return legend;
 	}

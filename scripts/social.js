@@ -71,28 +71,14 @@ var chicago_social = {
 
 	getColor: function(d) {
 
-			color = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
+			color = colorbrewer.YlOrRd[this.grades.length];
 
-			for (var i = 7; i > 0; i--) {
+			for (var i = this.grades.length - 1; i > 0; i--) {
 				if (d > this.grades[i]) {
 					return color[i];
 				}
 			}
 			return color[0];
-	},
-
-	getDiv: function() {
-
-		var div = L.DomUtil.create('div', 'info legend'),
-		//grades = this.grades;
-		labels = [];
-		// loop through our density intervals and generate a label with a colored square for each interval
-		for (var i = 0; i < this.grades.length; i++) {
-			div.innerHTML +=
-			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
-		}
-		return div;
 	},
 
 	getLegend: function() {
@@ -103,7 +89,7 @@ var chicago_social = {
 		for (var i = 0; i < this.grades.length; i++) {
 			legend +=
 			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
 		}
 		return legend;
 	}
