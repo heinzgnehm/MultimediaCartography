@@ -116,5 +116,18 @@ var chicago_ethnicity = {
 			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
 		}
 		return div;
+	},
+
+	getLegend: function() {
+
+		var legend = "";
+		labels = [];
+		// loop through our density intervals and generate a label with a colored square for each interval
+		for (var i = 0; i < this.grades.length; i++) {
+			legend +=
+			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
+		}
+		return legend;
 	}
 }

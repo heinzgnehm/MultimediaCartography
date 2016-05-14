@@ -31,7 +31,7 @@
 		<script type="text/javascript" src="libs/jquery-ui-1.11.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="libs/jstree-3.2.1/jstree.min.js"></script>
 		<script type="text/javascript" src="libs/noUiSlider-8.3.0/nouislider.js"></script>
-		
+
 
 	</head>
 	<body>
@@ -68,7 +68,7 @@
 		<div class="collapsed-navigation">
 			<button id="collapse-right" class="ui-btn ui-shadow ui-corner-all">Show</button>
 		</div>
-		
+
 		<!-- DIV element to display the bar chart on the left -->
 		<div class="graph-panel ns collapse">
 			<div class="graph-tab-corner">
@@ -155,7 +155,6 @@
 
 				chosenDataSet.init(name);
 				showDataLayer(chosenDataSet);
-				showLegend(chosenDataSet);
 				showInfo(chosenDataSet);
 			}
 
@@ -166,7 +165,6 @@
 
 				chosenDataSet.setYear(year);
 				showDataLayer(chosenDataSet);
-				showLegend(chosenDataSet);
 				showInfo(chosenDataSet);
 			}
 
@@ -184,20 +182,6 @@
 			}
 
 			/*
-				Display the legend on the map.
-			*/
-			function showLegend(dataSet) {
-				if (legend != undefined) {
-					legend.removeFrom(map);
-				}
-				legend = L.control({position: 'bottomright'});
-				legend.onAdd = function(map) {
-					return dataSet.getDiv();
-				};
-				legend.addTo(map);
-			}
-
-			/*
 				Display the info box on the map.
 			*/
 			function showInfo(dataSet) {
@@ -208,13 +192,18 @@
 				info = L.control();
 				info.onAdd = function (map) {
 					this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+					this.properties = L.DomUtil.create('div', 'properties', this._div);
+					this.spacer = L.DomUtil.create('div', 'spacer', this._div);
+					this.spacer.innerHTML = "<hr>";
+					this.legend = L.DomUtil.create('div', 'legend', this._div);
+					this.legend.innerHTML = dataSet.getLegend();
 					this.update();
 					return this._div;
 				};
 
 				// method that we will use to update the control based on feature properties passed
 				info.update = function (props) {
-					this._div.innerHTML = '<h4>' + dataSet.title + '</h4>' +  (props ?
+					this.properties.innerHTML = '<h4>' + dataSet.title + '</h4>' +  (props ?
 						'<b>' + props.community + '</b><br />' + props[dataSet.name].toFixed() + " " + dataSet.unit
 						: 'Hover over a community');
 				};
