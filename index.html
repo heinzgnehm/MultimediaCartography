@@ -115,9 +115,9 @@
 
 				  // Next, split the url by the ?
 				  var qparts = url.split("?");
-
+				  console.log(qparts);
 				  // Check that there is a querystring, return "" if not
-				  if (qparts.length == 0)
+				  if (qparts.length <2)
 				  {
 				    return "";
 				  }
