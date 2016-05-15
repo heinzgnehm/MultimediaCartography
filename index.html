@@ -83,7 +83,7 @@
 		</div>
 		<!-- DIV element to display bar graph -->
 		<div id="bar-graph" title="Bar Graph">
-			<iframe id="bar-graph-frame" frameborder="0"></iframe>
+			<!--<iframe id="bar-graph-frame" frameborder="0"></iframe>-->
 		</div>
 
 		<!-- DIV element to display the leaflet map. -->
@@ -310,11 +310,12 @@
 				});
 			}
 			function showAboutTheData(id){
+					console.log(id);
 					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
 					console.log(graphPanelWidth);
 					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
-					$('.graph-tab').css("padding","10px 10px 10px 10px");
+					$('.graph-tab').css("padding","15px 10px 10px 10px");
 					$('.graph-tab').load('info/info.html');
 			}
 
