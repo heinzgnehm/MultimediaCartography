@@ -305,7 +305,13 @@ var currentBarId='';
 */
 setInterval( function(){if (startHelp=='true'){
 	showHelp();
-}
+	$("#help").button({
+		    			       icons: {
+		                               		primary: "ui-icon-helps-close"
+		                               },
+		   			       text: false
+					       });
+	}
 },2000);
 
 $('#menu-1,#menu-2').menu();
