@@ -8,7 +8,7 @@ var navigation = {
 		*/
 		'core': {
 				"animation": 0,
-				"check_callback": true,
+				'check_callback': true,
 				"themes": {
 						"stripes": true
 				},
@@ -40,7 +40,7 @@ var navigation = {
 								"icon": "icons/svg/layer.svg",
 						}, {
 								"id": "crime:theft_pc",
-								"text": "Theft",
+								"text": "Theft   ",
 								"icon": "icons/svg/layer.svg",
 						}, {
 								"id": "crime:assault_pc",
@@ -188,6 +188,8 @@ var navigation = {
 				console.log('iiiii');
 				$('.graph-panel').css("width", "0");
 		    		$('.map').css("right", "0");
+		    		map.resize();
+		    		isBarGraph=false;
 				//$('#map').css("visibility", "visible");
 		    //$('.mappanel').css("left","30px");
 		});
@@ -232,6 +234,15 @@ var navigation = {
    			 $("body").load("landing.html");
 
 		});
+		$('#help').button().click(function(event) {
+        		  	showHelp();
+   			 	$("#help").button({
+		    			       icons: {
+		                               		primary: "ui-icon-helps-close"
+		                               },
+		   			       text: false
+					       });
+		});
 		/* home button event and layover */
 		$('#home-map').button().click(function(event) {
    			 map.setView([41.8369, -87.6847], 11);
@@ -270,6 +281,12 @@ var navigation = {
 		    },
 		    text: false
 		});
+		$("#help").button({
+		    icons: {
+		        primary: "ui-icon-helps"
+		    },
+		    text: false
+		});
 		$("#home-map").button({
 		   /* icons: {
 		        primary: "ui-icon-home"
@@ -278,10 +295,18 @@ var navigation = {
 		});
 		$('#tabs').tabs();
 
+//gloabl varible for help status and bar graph
+var isHelp=false;
+var isBarGraph=false;
+var currentBarId='';
 
-$('#autocomplete').autocomplete({
-    source: ['Innovative Map', 'Future Map']
-});
+/*
+	start help if was lanched from landing page
+*/
+setInterval( function(){if (startHelp=='true'){
+	showHelp();
+}
+},2000);
 
 $('#menu-1,#menu-2').menu();
 
@@ -311,7 +336,8 @@ $('#menu-1,#menu-2').menu();
 			slider.noUiSlider.on('change', function (values, handle) {
 			console.log("slider changed to " + values[handle]);
 			showYear(values[handle]);
-			updateBarGraph();
+			if(isBarGraph&&chosenDataSet&&currentBarId&&currentBarId.trim('-')[0]=='crime'){
+			updateBarGraph();}
 		});
 
 		function showSlider() {
@@ -481,21 +507,7 @@ function refreshinfo(data) {
                 });
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
-		    var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
-		    console.log(graphPanelWidth);
-		    $('.graph-panel').css("width",graphPanelWidth.toString()+"px");
-		    $('.map').css("right",(graphPanelWidth-2).toString()+"px");
-                    id = event.target.getAttribute('id');
-                    console.log(id);
-		    if (id.split('-')[0]=="crime"){
-		    	year=parseInt(slider.noUiSlider.get());
-		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];
-		    	}
-		    if (id.split('-')[0]=="ethnicity"){
-		    	year=parseInt(slider.noUiSlider.get());
-		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
-		    	}
-		    showBarGraph(id);
+		    updateBarGraph(event);
 		    //$(".graph-tab").load('graph/BarGraphSort.html?id='+ id);
 		    /*$('#bar-graph').dialog({
                         title: 'Bar Graph',
@@ -656,10 +668,32 @@ $('#layers-tree')
     })
 
 /*** update the bar graph when year is changed ***/
-function updateBarGraph(){
-if ($('#bar-graph').dialog('isOpen')==true){
+function updateBarGraph(event){
+		    event = event || 0;
+			var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
+		    console.log(graphPanelWidth);
+		    $('.graph-panel').css("width",graphPanelWidth.toString()+"px");
+		    $('.map').css("right",(graphPanelWidth-2).toString()+"px");
+		    if (event!=0){
+                    	id = event.target.getAttribute('id');
+                    	currentBarId=id;
+                    } else {
+                    	id=currentBarId;
+                    }
+                  
+                    console.log(id);
+		    if (id.split('-')[0]=="crime"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    if (id.split('-')[0]=="ethnicity"){
+		    	year=parseInt(slider.noUiSlider.get());
+		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
+		    	}
+		    showBarGraph(id);
+		    isBarGraph=true;
 	//console.log($('#bar-graph').dialog("option"));
-	id =$('#bar-graph').dialog("option").name;
+	/*id =$('#bar-graph').dialog("option").name;
 	if (id.split('-')[0]=='crime'){
 		year=parseInt(slider.noUiSlider.get());
 		id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1].split(':')[1]+'-'+id.split('-')[2];
@@ -681,9 +715,135 @@ if ($('#bar-graph').dialog('isOpen')==true){
 
 	}
 
-	}
+	}*/
 
 }
+
+function showHelp(){
+	$(".tips").remove();
+	$("#layers-tree").jstree(true).open_node("crime");
+   	//$("#layers-tree").jstree(true).deselect_node("crime:homicide_pc");
+   	// create all tips	
+   	createMark('help',{dx:50,dy:30},"Close help mode",'pointer');
+   	createMark('landing',{dx:50,dy:70},"Back to landing page");
+   	createMark('fullscreen',{dx:50,dy:110},"Fullscreen");
+   	
+   	createMark('crime-info',{dx:100,dy:20},"Info about the dataset");
+   	createMark('crime-burglary_pc-bar',{dx:120,dy:20},"Generate bar graph for the dataset");
+   	createMark('crime:theft_pc_anchor',{dx:230,dy:20},"Select the dataset",'menu-anchor');
+   	
+   	createMark('about',{dx:-50,dy:70},"About the Atlas");
+   	createMark('imprint',{dx:-50,dy:30},"Imprint");
+   	
+   	createMark('home-map',{dx:-50,dy:20},"Zoom to initial view");
+   	createMark('noUi-handle',{dx:50,dy:-20},"Change year",'handle');
+   	
+   	$("*:not(.tips):not(body)").addClass("trasparent");
+   	$("#help-help").click(function() {
+ 			 $(".tips").remove();
+			 $("*:not(.tips):not(body):not(#help)").removeClass("trasparent");
+			 $("#help").button({
+	    			       icons: {
+	                               		primary: "ui-icon-helps"
+	                               },
+	   			       text: false
+				       });
+			 isHelp=false;
+	});
+	isHelp=true;
+	}
+
+function createMark(id,dline,text,type){
+	type = type || 0;
+	var num = 100;
+	$("#help").css('width',10);
+	var helpMark = $("<div></div>");
+	var pos= $(document.getElementById(id)).offset();
+	var hwidth=parseInt($(document.getElementById(id)).css("width"));
+	var hheight=parseInt($(document.getElementById(id)).css("height"));
+	// option also for class
+	if (pos) {
+	} else {
+ 		 pos= $(document.getElementsByClassName(id)).offset();
+ 		 hwidth=parseInt($(document.getElementsByClassName(id)).css("width"));
+		 hheight=parseInt($(document.getElementsByClassName(id)).css("height"));
+	}
+	//console.log(pos);
+
+	//console.log(id +"." +pos);
+	helpMark.attr('id', id+'-help');
+	helpMark.attr('class', 'help tips');
+	helpMark.css({top: pos.top-7, left: pos.left-8, position:'absolute', width: hwidth+15,height: hheight+15,});
+	
+	switch(type){
+		case 'menu-anchor':
+			helpMark.css({top: pos.top-7, left: pos.left-8, position:'absolute', width: hwidth+30,height: hheight+15,});
+			break;
+		case 'handle':
+			helpMark.css({top: pos.top-10, left: pos.left-11, position:'absolute', width: hwidth+15,height: hheight+15,});
+			break;
+		case 'pointer':
+			helpMark.css({top: pos.top-7, left: pos.left-8, position:'absolute', width: hwidth+15,height: hheight+15, cursor:'pointer'});
+			break;
+		case 0:
+			break;
+		default:
+        		return 0;
+		}
+		
+	helpMark.appendTo('body');
+	//create line
+	pos=helpMark.offset();
+	hwidth=parseInt(helpMark.css("width"));
+	hheight=parseInt(helpMark.css("height"));
+	var helpLine = $("<div></div>");
+	helpLine.attr('id', id+'-help-line');
+	helpLine.attr('class', 'help-line  tips');
+	var helpText = $("<div>"+text+"</div>");
+	helpText.attr('id', id+'-help-text');
+	helpText.attr('class', 'help-text  tips')
+	if(dline.dx>0&&dline.dy>0){
+		helpLine.css({top: pos.top+hheight+5, left: pos.left+hwidth/2-2, position:'absolute', width: dline.dx+6,height: dline.dy+6,});
+		helpLineSvg = "<svg height=\""+(dline.dy+6).toString()+"\" width=\""+(dline.dx+6).toString()+"\">"+
+	  				"<polyline points=\"3,3 3,"+(dline.dy).toString()+" "+ (dline.dx).toString() +","+ (dline.dy).toString() + "\" style=\"fill:none;stroke:#d41f25;stroke-width:2\" />"+
+	 		 		"Sorry, your browser does not support inline SVG."+
+			      "</svg>";
+		helpLine.append(helpLineSvg);
+		// fix text position
+		helpText.css({top: pos.top+hheight+dline.dy-5, left: pos.left+hwidth/2-4+dline.dx, position:'absolute'});
+		}
+	else if (dline.dx<0&&dline.dy<0){
+		// DO not occur ,to be implemented, tested
+		}
+	else if (dline.dx<0&&dline.dy>0){
+		dline.dx=Math.abs(dline.dx);
+		dline.dy=Math.abs(dline.dy);
+		helpLine.css({top: pos.top+hheight+5, left: pos.left+hwidth/2-dline.dx-4, position:'absolute', width: dline.dx+6,height: dline.dy+6,});
+		helpLineSvg = "<svg height=\""+(dline.dy+6).toString()+"\" width=\""+(dline.dx+6).toString()+"\">"+
+	  				"<polyline points=\""+(dline.dx+3).toString()+",3 "+(dline.dx+3).toString()+","+(dline.dy+3).toString()+" 3,"+ (dline.dy+3).toString() + "\" style=\"fill:none;stroke:#d41f25;stroke-width:2\" />"+
+	 		 		"Sorry, your browser does not support inline SVG."+
+			      "</svg>";
+		helpLine.append(helpLineSvg);
+		// fix text position
+		helpText.css({top: pos.top+hheight+dline.dy-3, right: $(window).width()-pos.left-hwidth/2+4+dline.dx, position:'absolute'});
+		}
+	else if (dline.dx>0&&dline.dy<0){
+		dline.dx=Math.abs(dline.dx);
+		dline.dy=Math.abs(dline.dy);
+		helpLine.css({top: pos.top-dline.dy-5, left: pos.left+hwidth/2, position:'absolute', width: dline.dx+6,height: dline.dy+6,});
+		helpLineSvg = "<svg height=\""+(dline.dy+6).toString()+"\" width=\""+(dline.dx+6).toString()+"\">"+
+	  				"<polyline points=\"3,"+(dline.dy+3).toString()+" 3,3 "+(dline.dx+3).toString()+",3\" style=\"fill:none;stroke:#d41f25;stroke-width:2\" />"+
+	 		 		"Sorry, your browser does not support inline SVG."+
+			      "</svg>";
+		helpLine.append(helpLineSvg);
+		// fix text position
+		helpText.css({top: pos.top-dline.dy-9, left: pos.left+hwidth/2+dline.dx+3, position:'absolute'});
+		
+		}
+	
+	helpLine.appendTo('body');
+	helpText.appendTo('body');
+	}
 
 /*** Toggle full screen function ***/
 function toggleFullscreen(elem) {
@@ -711,3 +871,13 @@ function toggleFullscreen(elem) {
         }
     }
 }
+
+/*** event listener for windows resize **/
+window.addEventListener("resize", function(){
+    if(isBarGraph){
+    	updateBarGraph();
+    }
+    if(isHelp){
+    	showHelp();
+    }
+}); 

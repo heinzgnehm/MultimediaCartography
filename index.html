@@ -19,7 +19,6 @@
 
 		<!-- Remote libraries -->
 		<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
-		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 		<!-- <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> -->
 		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script> -->
@@ -43,6 +42,7 @@
 		  <button id="about">About</button>
 		  <button id="fullscreen">Full Screen</button>
 		  <button id="landing">landing</button>
+		  <button id="help">help</button>
 		  <input id="search" placeholder="Search-place">
 		  <div id="search-results"></div>
 		</div>
@@ -106,7 +106,59 @@
 	<script src="scripts/showBarGraph.js"></script>
 	<script src="scripts/colorbrewer.js"></script>
 	<script>
+			/* 
+				get value when index.htlm is called
+			*/
+			function getValue(varname){
+				  // First, we load the URL into a variable
+				  var url = window.location.href;
 
+				  // Next, split the url by the ?
+				  var qparts = url.split("?");
+
+				  // Check that there is a querystring, return "" if not
+				  if (qparts.length == 0)
+				  {
+				    return "";
+				  }
+
+				  // Then find the querystring, everything after the ?
+				  var query = qparts[1];
+
+				  // Split the query string into variables (separates by &s)
+ 				 var vars = query.split("&");
+
+				  // Initialize the value with "" as default
+				  var value = "";
+
+				  // Iterate through vars, checking each one for varname
+				  for (i=0;i<vars.length;i++)
+				  {
+				    // Split the variable by =, which splits name and value
+				    var parts = vars[i].split("=");
+    
+ 				   // Check if the correct variable
+				    if (parts[0] == varname)
+ 				   {
+ 				     // Load value into variable
+ 				     value = parts[1];
+
+ 				     // End the loop
+ 				     break;
+				    }
+ 					 }
+  
+ 				 // Convert escape code
+				  value = unescape(value);
+
+				  // Convert "+"s to " "s
+				  value.replace(/\+/g," ");
+
+				  // Return the value
+				  return value;
+			}
+			var startHelp = getValue("startHelp");
+			console.log(startHelp);
 			/*
 				Set the initial map view.
 			*/
@@ -260,4 +312,5 @@
 
 		</script>
 	<script src="scripts/gui.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
 </html>
