@@ -323,8 +323,8 @@ td {
 	z-index: 1;
 	height: 26px;
 	width: 26px;
-	left: 11px;
-	bottom: 100px;
+	right: 9px;
+	top: 75px;
 	/*background:white !important; /*#F7F7F7*/
 	border: 0px solid #ccc !important;
 	background-image: url(../icons/svg/dot-circle.svg) !important;
@@ -348,4 +348,6 @@ filter:none !important;};
 .fa-custom-dot{
     font-size:2em !important;
 }
-
+.info {
+    margin-top: 47px ! important;
+}
