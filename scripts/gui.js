@@ -474,12 +474,13 @@ function refreshinfo(data) {
         //add event listener for the button
         $('#' + folder + '-info').button().click(function(event) {
             id = event.target.getAttribute('id');
-            $('#dialog').dialog({
+            showAboutTheData(id);
+            /*$('#dialog').dialog({
                 title: id
             });
 						$('#dialogframe').prop('src', 'info/info.html#' + id);
 						console.log("gui.js > refreshinfo() > top: call info page at info/info.html#" + id);
-            //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+            //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');*/
             event.preventDefault();
         });
         if (data[folder].state.opened == true) {
@@ -564,12 +565,13 @@ function infocreate(data) {
         //add event listener for the button
         $('#' + folder + '-info').button().click(function(event) {
             id = event.target.getAttribute('id');
-            $('#dialog').dialog({
+            showAboutTheData(id);
+            /*$('#dialog').dialog({
                 title: id
             });
 						$('#dialogframe').prop('src', 'info/info.html#' + id);
 						console.log("gui.js > infocreate() > top: call info page at info/info.html#" + id);
-						//$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
+						//$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');*/
             event.preventDefault();
         });
         if (data[i].state.opened == true) {
@@ -668,6 +670,8 @@ $('#layers-tree')
         console.log("hheee");
         refreshinfo($("#layers-tree").jstree(true)._model.data);
     })
+
+
 
 /*** update the bar graph when year is changed ***/
 function updateBarGraph(event){

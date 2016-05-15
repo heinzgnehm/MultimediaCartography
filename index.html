@@ -115,7 +115,7 @@
 
 				  // Next, split the url by the ?
 				  var qparts = url.split("?");
-				  console.log(qparts);
+				  //console.log(qparts);
 				  // Check that there is a querystring, return "" if not
 				  if (qparts.length <2)
 				  {
@@ -308,6 +308,14 @@
 					mouseout: resetHighlight,
 					click: zoomToFeature
 				});
+			}
+			function showAboutTheData(id){
+					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
+					console.log(graphPanelWidth);
+					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
+					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
+					$('.graph-tab').css("padding","10px 10px 10px 10px");
+					$('.graph-tab').load('info/info.html');
 			}
 
 		</script>
