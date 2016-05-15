@@ -1,6 +1,6 @@
 
 * {
- font-family: "Helvetica Neue", sans-serif;
+ font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 
@@ -28,10 +28,11 @@ body {
 }
 
 #title{
-	margin:6px 10px 2px 10px;
+	position: absolute;
+	margin:8px 10px 2px 10px;
 	padding: 0px 30px 0px 30px;
 	font-weight: bold;
-	font-size: 120%;
+	font-size: 140%;
 	color:#222222;
 	
 }
@@ -51,7 +52,7 @@ body {
 	margin:4px 5px 4px 5px;
 }
 #imprint{
-	margin:4px 5px 4px 90px;
+	margin:4px 5px 4px 750px;
 }
 
 #search{position: absolute;
