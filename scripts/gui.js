@@ -138,9 +138,10 @@ var navigation = {
 				if (data.selected.length>1){
 					for (i=0;i<data.selected.length-1;i++){
 					$('#layers-tree').jstree(true).deselect_node(data.selected[i]);
-					}}
+					}
+						}
 
-
+				
 				/*
 						The id identifies the chosen data set.
 						0 colons: top level folder -> no action.
@@ -156,6 +157,7 @@ var navigation = {
 					year = values[2];
 				}
 				console.log("chosen Year on slider is " + year);
+				
 				switch (dataSet) {
 					case "crime":     showDataSet(dataSet, year + ":" + category); showSlider(); break;
 					case "ethnicity": showDataSet(dataSet, year + ":" + category); hideSlider(); break;
@@ -165,6 +167,11 @@ var navigation = {
 					//case 3: showDataSet(dataSet, year + ":" + category, year + ":" + category, ""); break;
 				}
 			});
+			// remove dtaset in case some body deselect them all
+			$('#layers-tree').on("deselect_node.jstree", function (e, data) {
+				console.log('deselected');
+				map.removeLayer(layer);});
+				
 
 		});
 
