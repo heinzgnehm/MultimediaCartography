@@ -299,18 +299,14 @@ var navigation = {
 var isHelp=false;
 var isBarGraph=false;
 var currentBarId='';
+var startHelpCount=0;
 
 /*
 	start help if was lanched from landing page
 */
-setInterval( function(){if (startHelp=='true'){
+setInterval( function(){if (startHelp=='true'&&startHelpCount<1){
 	showHelp();
-	$("#help").button({
-		    			       icons: {
-		                               		primary: "ui-icon-helps-close"
-		                               },
-		   			       text: false
-					       });
+	startHelpCount++;
 	}
 },2000);
 
@@ -757,6 +753,12 @@ function showHelp(){
 			 isHelp=false;
 	});
 	isHelp=true;
+	$("#help").button({
+		    			       icons: {
+		                               		primary: "ui-icon-helps-close"
+		                               },
+		   			       text: false
+					       });
 	}
 
 function createMark(id,dline,text,type){
