@@ -232,7 +232,8 @@ var navigation = {
 
 		});
 		$('#landing').button().click(function(event) {
-   			 $("body").load("landing.html");
+			window.open("landing.html");
+   			 /*$("body").load("landing.html");*/
 
 		});
 		$('#help').button().click(function(event) {
