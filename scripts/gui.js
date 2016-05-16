@@ -187,6 +187,7 @@ var navigation = {
 		$('#close-panel').button().click(function() {
 				console.log('iiiii');
 				$('.graph-panel').css("width", "0");
+				$('.graph-tab-in').empty();
 		    		$('.map').css("right", "0");
 		    		//console.log(map);
 		    		map.invalidateSize();
@@ -338,7 +339,7 @@ $('#menu-1,#menu-2').menu();
 			slider.noUiSlider.on('change', function (values, handle) {
 			console.log("slider changed to " + values[handle]);
 			showYear(values[handle]);
-			if(isBarGraph&&chosenDataSet&&currentBarId&&currentBarId.trim('-')[0]=='crime'){
+			if(isBarGraph&&!(chosenDataSet == null)&&!(currentBarId == null)&&currentBarId.split('-')[0]=='crime'){
 			updateBarGraph();}
 		});
 
