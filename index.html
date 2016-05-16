@@ -357,6 +357,7 @@
     					}, 500);
     					}
     					else{}
+    					map.invalidateSize();
 			}
 			/**/
 			function showImprint(){
@@ -365,6 +366,7 @@
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
 					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
 					$('.graph-tab-in').load('info/imprint.html');
+					map.invalidateSize();
 					}
 			function showAbout(){
 					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
@@ -372,6 +374,7 @@
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
 					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
 					$('.graph-tab-in').load('info/about.html');
+					map.invalidateSize();
 					}
 
 		</script>
