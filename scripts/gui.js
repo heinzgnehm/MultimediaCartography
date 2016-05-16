@@ -232,7 +232,7 @@ var navigation = {
 
 		});
 		$('#landing').button().click(function(event) {
-			window.open("landing.html");
+			window.open("landing.html",'_top');
    			 /*$("body").load("landing.html");*/
 
 		});
