@@ -387,8 +387,9 @@ filter:none !important;}
 
 .help{
 	z-index:10;
-	background-size: 100% 100%;
 	background-image: url(../icons/svg/circle01.svg) !important;	
+          background-size: 100% 100%;
+	
 }
 .help-line{
 	z-index:10;

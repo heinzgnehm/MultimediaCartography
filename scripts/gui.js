@@ -793,7 +793,9 @@ function createMark(id,dline,text,type){
 	//console.log(id +"." +pos);
 	helpMark.attr('id', id+'-help');
 	helpMark.attr('class', 'help tips');
+	
 	helpMark.css({top: pos.top-7, left: pos.left-8, position:'absolute', width: hwidth+15,height: hheight+15,});
+	//helpMark.html('<img src=\"../icons/svg/circle00.svg\">')
 	
 	switch(type){
 		case 'menu-anchor':
