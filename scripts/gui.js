@@ -475,7 +475,7 @@ function refreshinfo(data) {
 	$("#jstree-button-tab").append(newbuttoncontainer);
         //add event listener for the button
         $('#' + folder + '-info').button().click(function(event) {
-            id = event.target.getAttribute('id');
+            id = event.currentTarget.getAttribute('id');
             showAboutTheData(id);
             /*$('#dialog').dialog({
                 title: id
@@ -499,7 +499,7 @@ function refreshinfo(data) {
 		$("#jstree-button-tab").append(newbuttoncontainer);
 		// add event listener to info button
                 $('#' + subid + '-info').button().click(function(event) {
-                    id = event.target.getAttribute('id');
+                    id = event.currentTarget.getAttribute('id');
                     showAboutTheData(id);
 		    /*console.log(id);
                     $('#dialog').dialog({
@@ -567,7 +567,7 @@ function infocreate(data) {
 	$("#jstree-button-tab").append(newbuttoncontainer);
         //add event listener for the button
         $('#' + folder + '-info').button().click(function(event) {
-            id = event.target.getAttribute('id');
+            id = event.currentTarget.getAttribute('id');
             showAboutTheData(id);
             /*$('#dialog').dialog({
                 title: id
@@ -589,7 +589,7 @@ function infocreate(data) {
                 newbuttoncontainer.append(newinfo);
 		$("#jstree-button-tab").append(newbuttoncontainer);
                 $('#' + subid + '-info').button().click(function(event) {
-                    id = event.target.getAttribute('id');
+                    id = event.currentTarget.getAttribute('id');
                     showAboutTheData(id);
                     /*$('#dialog').dialog({
                         title: id
