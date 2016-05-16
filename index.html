@@ -89,16 +89,15 @@
 		</div>
 
 		<!-- DIV element to display the leaflet map. -->
-		<div id="map" class="map"></id>
+		<div id="map" class="map">
+			<button id="home-map" class="home-map"></button>
+		</div>
 
 		<!-- DIV element to display the time slider. -->
 		<div class="slider-container">
 			<div id="slider"></div>
 		</div>
-		<!-- button element for home button -->
-		<button id="home-map" class="home-map" >
-			<!--<i class="fa fa-dot-circle-o fa-1.5x" aria-hidden="true"></i>-->
-		</button> <!--class="ui-btn ui-shadow ui-corner-all"-->
+		
 
 	</body>
 	<script src="scripts/metadata.js"></script>
@@ -319,45 +318,48 @@
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
 					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
 					$('.graph-tab-in').load('info/info.html');
-					if (!(id==0)){
-					id=id.split('-');
-					if (id.length>2)
-						{
-						id=id[1];
-						id=id.split('_');
-						id=id[0];
-					}
-					else {
-						id=id[0];
-					}
-					if (id=='education'){id='diploma'};
-					if (id=='ethnicity'){id='ethnic'};
-					console.log(id);
+					map.invalidateSize();
 					
-					//console.log( $( '#'+id ).position());
-					var childPos = $( '#'+id ).offset();
-					/*switch(id){
-						case 'crime': childPos.top=440;
-							    console.log("hhhh");
-							    break;
-						case 'social': childPos.top=1340;
-							    break;
-					}*/
-					console.log(childPos);
-					var parentPos = $('.graph-tab-out').offset();
-					console.log(parentPos);
-					var toScrollOffset = {
-    						top: childPos.top - parentPos.top,
-    						left: childPos.left - parentPos.left
-					}
-					console.log( toScrollOffset);
-					console.log($('.graph-tab-out').scrollTop());
-					$('.graph-tab-out').animate({
-        					scrollTop: toScrollOffset.top+$('.graph-tab-out').scrollTop()
-    					}, 500);
-    					}
-    					else{}
-    					map.invalidateSize();
+					setTimeout(function(){
+						if (!(id==0)){
+							id=id.split('-');
+							if (id.length>2)
+							{
+								id=id[1];
+								id=id.split('_');
+								id=id[0];
+							}
+							else {
+								id=id[0];
+							}
+							if (id=='education'){id='diploma'};
+							if (id=='ethnicity'){id='ethnic'};
+							console.log(id);
+					
+							//console.log( $( '#'+id ).position());
+							var childPos = $( '#'+id ).offset();
+							/*switch(id){
+								case 'crime': childPos.top=440;
+									    console.log("hhhh");
+									    break;
+								case 'social': childPos.top=1340;
+									    break;
+							}*/
+							console.log(childPos);
+							var parentPos = $('.graph-tab-out').offset();
+							console.log(parentPos);
+							var toScrollOffset = {
+		    						top: childPos.top - parentPos.top,
+		    						left: childPos.left - parentPos.left
+							}
+							console.log( toScrollOffset);
+							console.log($('.graph-tab-out').scrollTop());
+							$('.graph-tab-out').animate({
+		        					scrollTop: toScrollOffset.top+$('.graph-tab-out').scrollTop()
+		    					}, 700);
+		    					}
+		    					else{}		
+					},200);
 			}
 			/**/
 			function showImprint(){
