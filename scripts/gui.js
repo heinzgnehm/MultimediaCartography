@@ -169,7 +169,7 @@ var navigation = {
 			});
 			// remove dtaset in case some body deselect them all
 			$('#layers-tree').on("deselect_node.jstree", function (e, data) {
-				console.log('deselected');
+				//console.log('deselected');
 				map.removeLayer(layer);});
 				
 
@@ -188,7 +188,8 @@ var navigation = {
 				console.log('iiiii');
 				$('.graph-panel').css("width", "0");
 		    		$('.map').css("right", "0");
-		    		map.resize();
+		    		//console.log(map);
+		    		map.invalidateSize();
 		    		isBarGraph=false;
 				//$('#map').css("visibility", "visible");
 		    //$('.mappanel').css("left","30px");
@@ -202,18 +203,17 @@ var navigation = {
 		});
 
 		$('#imprint').button().click(function(event) {
-			$('#dialog').dialog({
-		  	title: 'Imprint'
-		  });
-		  $('#dialogframe').prop('src', 'info/imprint.html');
+			
+		  showImprint();
 		  event.preventDefault();
 		});
 
 		$('#about').button().click(function(event) {
-			$('#dialog').dialog({
+			showAbout();
+			/*$('#dialog').dialog({
 				title: 'About'
 			});
-			$('#dialogframe').prop('src', 'info/about.html');
+			$('#dialogframe').prop('src', 'info/about.html');*/
 			event.preventDefault();
 		});
 

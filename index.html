@@ -313,6 +313,13 @@
 			}
 			/* function to load the external html into the bar/infp panel has to be here for the urls policy*/
 			function showAboutTheData(id){
+					id = id || 0;
+					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
+					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
+					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
+					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
+					$('.graph-tab-in').load('info/info.html');
+					if (!(id==0)){
 					id=id.split('-');
 					if (id.length>2)
 						{
@@ -326,11 +333,7 @@
 					if (id=='education'){id='diploma'};
 					if (id=='ethnicity'){id='ethnic'};
 					console.log(id);
-					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
-					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
-					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
-					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
-					$('.graph-tab-in').load('info/info.html');
+					
 					//console.log( $( '#'+id ).position());
 					var childPos = $( '#'+id ).offset();
 					/*switch(id){
@@ -352,7 +355,24 @@
 					$('.graph-tab-out').animate({
         					scrollTop: toScrollOffset.top+$('.graph-tab-out').scrollTop()
     					}, 500);
+    					}
+    					else{}
 			}
+			/**/
+			function showImprint(){
+					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
+					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
+					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
+					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
+					$('.graph-tab-in').load('info/imprint.html');
+					}
+			function showAbout(){
+					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
+					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
+					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
+					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
+					$('.graph-tab-in').load('info/about.html');
+					}
 
 		</script>
 	<script src="scripts/gui.js"></script>
