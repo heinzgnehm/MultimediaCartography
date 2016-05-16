@@ -300,7 +300,7 @@ var navigation = {
 //gloabl varible for help status and bar graph
 var isHelp=false;
 var isBarGraph=false;
-var currentBarId='';
+var currentBarId='hey hey hey';
 var startHelpCount=0;
 
 /*
@@ -681,19 +681,20 @@ $('#layers-tree')
 function updateBarGraph(event){
 		    event = event || 0;
 			var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
-		    console.log(graphPanelWidth);
+		    //console.log(graphPanelWidth);
+		    //console.log(event.currentTarget);
 		    $('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 		    $('.map').css("right",(graphPanelWidth-2).toString()+"px");
 		    if (event!=0){
+		    	console.log("siamo qui");
 		    	$('.graph-tab-out').animate({
   				scrollTop: 0
 		    		}, 0);
-                    	id = event.target.getAttribute('id');
+                    	id = event.currentTarget.getAttribute('id');
                     	currentBarId=id;
                     } else {
                     	id=currentBarId;
                     }
-                  
                     console.log(id);
 		    if (id.split('-')[0]=="crime"){
 		    	year=parseInt(slider.noUiSlider.get());
