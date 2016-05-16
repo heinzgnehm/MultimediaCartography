@@ -67,6 +67,10 @@ body {
   right: 40px;
   top:2px;
   }
+ /* chrome appearence */
+#search:not(*:root) {
+  top: 7px!important;
+ }
 
 #search-results{
 	position:absolute;
@@ -148,7 +152,7 @@ z-index:2;
   right: 0;
   width: 30px;
   height: 30px;
-  background-colr: rgb(0,0,0,1);
+  background-color: rgb(0,0,0,1);
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   visibility: hidden;
   z-index: 1;
@@ -235,6 +239,9 @@ width:50px;
 display:inline;
 z-index: 1000;
 	}
+/* in case of chrome*/
+#jstree-button-tab:not(*:root)  {
+top: 48px!important;}
 .jstree-button-container{
 margin: 0 0 1px 0;
 padding: 0 0 0 0;
@@ -283,7 +290,7 @@ width: 80%;
 margin: 0px 10% 10px 10%;
 }
 .ui-button-icon-only {
-    width: 23px; !important
+    width: 23px ; /*!important*/
 }
 
 .slider-container{
@@ -294,9 +301,8 @@ height:50px;
 bottom:50px;
 left:270px;
 z-index:1;
-zoom: 0.9;
 -ms-transform: scale(0.8); /* IE 9 */
--webkit-transform: scale(0.8); /* Chrome, Safari, Opera */
+/*-webkit-transform: scale(0.8); /* Chrome, Safari, Opera */
 transform: scale(0.8);}
 /*
 .ui-slider-tick-mark{
@@ -370,7 +376,7 @@ background:white!important;
     display:none
 }
 .no_transparent>.jstree-icon {
-filter:none !important;};
+filter:none !important;}
 
 .fa-custom-dot{
     font-size:2em !important;
@@ -397,5 +403,5 @@ filter:none !important;};
 .trasparent{
 	opacity:0.93;}
 #help-help{	
-	"cursor:pointer";
+	cursor:pointer;
 	}
