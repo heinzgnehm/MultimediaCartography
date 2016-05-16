@@ -74,7 +74,9 @@
 			<div class="graph-tab-corner">
 				<button id="close-panel" class="ui-btn ui-shadow ui-corner-all">Close Panel</button>
 			</div>
-			<div class="graph-tab"></div>
+			<div class="graph-tab-out">
+				<div class="graph-tab-in"></div>
+			</div>
 		</div>
 
 		<!-- DIV element to display dialog windows. -->
@@ -309,14 +311,47 @@
 					click: zoomToFeature
 				});
 			}
+			/* function to load the external html into the bar/infp panel has to be here for the urls policy*/
 			function showAboutTheData(id){
+					id=id.split('-');
+					if (id.length>2)
+						{
+						id=id[1];
+						id=id.split('_');
+						id=id[0];
+					}
+					else {
+						id=id[0];
+					}
+					if (id=='education'){id='diploma'};
+					if (id=='ethnicity'){id='ethnic'};
 					console.log(id);
 					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
-					console.log(graphPanelWidth);
 					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
-					$('.graph-tab').css("padding","15px 10px 10px 10px");
-					$('.graph-tab').load('info/info.html');
+					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
+					$('.graph-tab-in').load('info/info.html');
+					//console.log( $( '#'+id ).position());
+					var childPos = $( '#'+id ).offset();
+					/*switch(id){
+						case 'crime': childPos.top=440;
+							    console.log("hhhh");
+							    break;
+						case 'social': childPos.top=1340;
+							    break;
+					}*/
+					console.log(childPos);
+					var parentPos = $('.graph-tab-out').offset();
+					console.log(parentPos);
+					var toScrollOffset = {
+    						top: childPos.top - parentPos.top,
+    						left: childPos.left - parentPos.left
+					}
+					console.log( toScrollOffset);
+					console.log($('.graph-tab-out').scrollTop());
+					$('.graph-tab-out').animate({
+        					scrollTop: toScrollOffset.top+$('.graph-tab-out').scrollTop()
+    					}, 500);
 			}
 
 		</script>

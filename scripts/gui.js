@@ -498,13 +498,14 @@ function refreshinfo(data) {
 		// add event listener to info button
                 $('#' + subid + '-info').button().click(function(event) {
                     id = event.target.getAttribute('id');
-		    console.log(id);
+                    showAboutTheData(id);
+		    /*console.log(id);
                     $('#dialog').dialog({
                         title: id
                     });
 										//$('#dialogframe').prop('src', 'info/info.html#' + id);
 										$('#dialogframe').prop('src', 'info/info.html#' + id);
-										console.log("gui.js > refreshinfo() > bottom: call info page at info/info.html#" + id);
+										console.log("gui.js > refreshinfo() > bottom: call info page at info/info.html#" + id);*/
                     //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
                     event.preventDefault();
                 });
@@ -587,11 +588,12 @@ function infocreate(data) {
 		$("#jstree-button-tab").append(newbuttoncontainer);
                 $('#' + subid + '-info').button().click(function(event) {
                     id = event.target.getAttribute('id');
-                    $('#dialog').dialog({
+                    showAboutTheData(id);
+                    /*$('#dialog').dialog({
                         title: id
                     });
 										$('#dialogframe').prop('src', 'info/info.html#' + id);
-										console.log("gui.js > infocreate() > bottom: call info page at info/info.html#" + id);
+										console.log("gui.js > infocreate() > bottom: call info page at info/info.html#" + id);*/
                     //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
                     event.preventDefault();
                 });

@@ -194,13 +194,16 @@ z-index:2;
   z-index: 1;
   border-left: 1px solid #aaaaaa;
   border-radius: 6px;
-  overflow:scroll;
+
 }
-.graph-tab{
-  margin: 0px 0px 0px 0px;
+.graph-tab-out{
+  /*margin: 0px 0px 0px 0px;*/
   /*border-left: 1px solid #aaaaaa;*/
+  height:100%;
+  width:100%;
   background: white;
   border-radius: 2px;
+    overflow:scroll;
   
 }
 
