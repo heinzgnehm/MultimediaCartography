@@ -684,6 +684,9 @@ function updateBarGraph(event){
 		    $('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 		    $('.map').css("right",(graphPanelWidth-2).toString()+"px");
 		    if (event!=0){
+		    	$('.graph-tab-out').animate({
+  				scrollTop: 0
+		    		}, 0);
                     	id = event.target.getAttribute('id');
                     	currentBarId=id;
                     } else {
