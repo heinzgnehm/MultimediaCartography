@@ -301,16 +301,16 @@ var navigation = {
 var isHelp=false;
 var isBarGraph=false;
 var currentBarId='hey hey hey';
-var startHelpCount=0;
 
 /*
 	start help if was lanched from landing page
+	removed the setInterval function -- added event listener when the tree loads (see line 679)
 */
-setInterval( function(){if (startHelp=='true'&&startHelpCount<1){
-	showHelp();
-	startHelpCount++;
+function testHelp (startHelp) {
+	if (startHelp) {
+		showHelp();
 	}
-},2000);
+};
 
 $('#menu-1,#menu-2').menu();
 
@@ -674,6 +674,11 @@ $('#layers-tree')
         console.log("hheee");
         refreshinfo($("#layers-tree").jstree(true)._model.data);
     })
+    //add event listener to test if he should show the help when the tree finished loading all nodes
+    //https://www.jstree.com/api/#/?q=.jstree%20Event&f=ready.jstree
+    .on('ready.jstree', function() {
+    	testHelp(startHelp);
+    });
 
 
 
