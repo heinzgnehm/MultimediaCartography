@@ -141,7 +141,7 @@ var navigation = {
 					}
 						}
 
-				
+
 				/*
 						The id identifies the chosen data set.
 						0 colons: top level folder -> no action.
@@ -156,8 +156,8 @@ var navigation = {
 				} else {
 					year = values[2];
 				}
-				console.log("chosen Year on slider is " + year);
-				
+				//console.log("chosen Year on slider is " + year);
+
 				switch (dataSet) {
 					case "crime":     showDataSet(dataSet, year + ":" + category); showSlider(); break;
 					case "ethnicity": showDataSet(dataSet, year + ":" + category); hideSlider(); break;
@@ -171,7 +171,7 @@ var navigation = {
 			$('#layers-tree').on("deselect_node.jstree", function (e, data) {
 				//console.log('deselected');
 				map.removeLayer(layer);});
-				
+
 
 		});
 
@@ -204,7 +204,7 @@ var navigation = {
 		});
 
 		$('#imprint').button().click(function(event) {
-			
+
 		  showImprint();
 		  event.preventDefault();
 		});
@@ -333,25 +333,29 @@ $('#menu-1,#menu-2').menu();
 		});
 
 			slider.noUiSlider.on('update', function (values, handle) {
-			console.log("slider changed to " + values[handle]);
-			//showYear(values[handle]);
+			//console.log("slider changed to " + values[handle]);
+			if (chosenDataSet) {
+				showYear(values[handle]);
+			}
 		});
 
 			slider.noUiSlider.on('change', function (values, handle) {
-			console.log("slider changed to " + values[handle]);
-			showYear(values[handle]);
+			//console.log("slider changed to " + values[handle]);
+			if (chosenDataSet) {
+				showYear(values[handle]);
+			}
 			if(isBarGraph&&!(chosenDataSet == null)&&!(currentBarId == null)&&currentBarId.split('-')[0]=='crime'){
 			updateBarGraph();}
 		});
 
 		function showSlider() {
-			console.log("show time slider");
+			//console.log("show time slider");
 			$('.slider-container').css("z-index", "2");
 		}
 
 		function hideSlider() {
-			console.log("hide time slider");
-			$('.slider-container').css("z-index", "0");
+			//console.log("hide time slider");
+			$('.slider-container').css("z-index", "-1");
 		}
 
 /* the fuction take the text in the search field make a query to the mapbox geocoder,
@@ -737,21 +741,21 @@ function showHelp(){
 	$(".tips").remove();
 	$("#layers-tree").jstree(true).open_node("crime");
    	//$("#layers-tree").jstree(true).deselect_node("crime:homicide_pc");
-   	// create all tips	
+   	// create all tips
    	createMark('help',{dx:50,dy:30},"Close help mode",'pointer');
    	createMark('landing',{dx:50,dy:70},"Back to landing page");
    	createMark('fullscreen',{dx:50,dy:110},"Fullscreen");
-   	
+
    	createMark('crime-info',{dx:100,dy:20},"Info about the dataset");
    	createMark('crime-burglary_pc-bar',{dx:120,dy:20},"Generate bar graph for the dataset");
    	createMark('crime:theft_pc_anchor',{dx:230,dy:20},"Select the dataset",'menu-anchor');
-   	
+
    	createMark('about',{dx:-50,dy:70},"About the Atlas");
    	createMark('imprint',{dx:-50,dy:30},"Imprint");
-   	
+
    	createMark('home-map',{dx:-50,dy:20},"Zoom to initial view");
    	createMark('noUi-handle',{dx:50,dy:-20},"Change year",'handle');
-   	
+
    	$("*:not(.tips):not(body)").addClass("trasparent");
    	$("#help-help").click(function() {
  			 $(".tips").remove();
@@ -793,10 +797,10 @@ function createMark(id,dline,text,type){
 	//console.log(id +"." +pos);
 	helpMark.attr('id', id+'-help');
 	helpMark.attr('class', 'help tips');
-	
+
 	helpMark.css({top: pos.top-7, left: pos.left-8, position:'absolute', width: hwidth+15,height: hheight+15,});
 	//helpMark.html('<img src=\"../icons/svg/circle00.svg\">')
-	
+
 	switch(type){
 		case 'menu-anchor':
 			helpMark.css({top: pos.top-7, left: pos.left-8, position:'absolute', width: hwidth+30,height: hheight+15,});
@@ -812,7 +816,7 @@ function createMark(id,dline,text,type){
 		default:
         		return 0;
 		}
-		
+
 	helpMark.appendTo('body');
 	//create line
 	pos=helpMark.offset();
@@ -860,9 +864,9 @@ function createMark(id,dline,text,type){
 		helpLine.append(helpLineSvg);
 		// fix text position
 		helpText.css({top: pos.top-dline.dy-9, left: pos.left+hwidth/2+dline.dx+3, position:'absolute'});
-		
+
 		}
-	
+
 	helpLine.appendTo('body');
 	helpText.appendTo('body');
 	}
@@ -902,4 +906,4 @@ window.addEventListener("resize", function(){
     if(isHelp){
     	showHelp();
     }
-}); 
+});

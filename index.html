@@ -97,7 +97,7 @@
 		<div class="slider-container">
 			<div id="slider"></div>
 		</div>
-		
+
 
 	</body>
 	<script src="scripts/metadata.js"></script>
@@ -107,7 +107,7 @@
 	<script src="scripts/showBarGraph.js"></script>
 	<script src="scripts/colorbrewer.js"></script>
 	<script>
-			/* 
+			/*
 				get value when index.htlm is called
 			*/
 			function getValue(varname){
@@ -137,7 +137,7 @@
 				  {
 				    // Split the variable by =, which splits name and value
 				    var parts = vars[i].split("=");
-    
+
  				   // Check if the correct variable
 				    if (parts[0] == varname)
  				   {
@@ -148,7 +148,7 @@
  				     break;
 				    }
  					 }
-  
+
  				 // Convert escape code
 				  value = unescape(value);
 
@@ -245,7 +245,7 @@
 
 				info = L.control();
 				info.onAdd = function (map) {
-					this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+					this._div = L.DomUtil.create('div', 'info'); // create a div with a class "infobox"
 					this.properties = L.DomUtil.create('div', 'properties', this._div);
 					this.spacer = L.DomUtil.create('div', 'spacer', this._div);
 					this.spacer.innerHTML = "<hr>";
@@ -278,7 +278,7 @@
 			function highlightFeature(e) {
 				var layer = e.target;
 				layer.setStyle({
-					weight: 5,
+					weight: 3,
 					color: '#666',
 					dashArray: '',
 					fillOpacity: 0.7
@@ -319,7 +319,7 @@
 					$('.graph-tab-in').css("padding","15px 10px 10px 10px");
 					$('.graph-tab-in').load('info/info.html');
 					map.invalidateSize();
-					
+
 					setTimeout(function(){
 						if (!(id==0)){
 							id=id.split('-');
@@ -337,7 +337,7 @@
 							if (id=='crime'){id='crimea'};
 							if (id=='social'){id='sociala'};
 							console.log(id);
-					
+
 							//console.log( $( '#'+id ).position());
 							var childPos = $( '#'+id ).offset();
 							/*switch(id){
@@ -360,7 +360,7 @@
 		        					scrollTop: toScrollOffset.top+$('.graph-tab-out').scrollTop()
 		    					}, 700);
 		    					}
-		    					else{}		
+		    					else{}
 					},200);
 			}
 			/**/

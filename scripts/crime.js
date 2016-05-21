@@ -22,13 +22,13 @@ var chicago_crime = {
 		this.name = name;
 		this.year = Number(name.slice(0, 4));
 		this.id = name.slice(5);
-		console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
-		this.title = metadata[this.id].title;
+		//console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
+		this.title = metadata[this.id].title + " " + year.toFixed(0);
 		this.unit = metadata[this.id].unit;
 		//this.createGrades(this.dataSet);
 		//console.log("linear grades " + this.grades);
 		this.createNonLinearGrades(this.dataSet, 4);
-		console.log("non-linear grades " + this.grades);
+		//console.log("non-linear grades " + this.grades);
 	},
 
 	/*
@@ -64,7 +64,7 @@ var chicago_crime = {
 		for (i = 0; i < this.dataSet.features.length; i++) {
 			if (community == this.dataSet.features[i].properties.community) {
 				index = i;
-				console.log("found community " + community + " at index " + index);
+				//console.log("found community " + community + " at index " + index);
 				break;
 			}
 		}
@@ -79,8 +79,8 @@ var chicago_crime = {
   setYear(year) {
 		this.year = Math.floor(year);
 		this.name = this.year + ":" + this.id;
-		this.title = this.year + ":" + this.id;
-		console.log("year: " + this.year + ", id: " + this.id);
+		this.title = metadata[this.id].title + " " + this.year;
+		//console.log("year: " + this.year + ", id: " + this.id);
 	},
 
 	/*
@@ -189,7 +189,7 @@ var chicago_crime = {
 		// loop through our density intervals and generate a label with a colored square for each interval
 		for (var i = 0; i < this.grades.length; i++) {
 			var gradePlusOne = parseInt(this.grades[i]) + 1;
-			console.log("crime.js > getLegend(): grade " + i + " | value " + gradePlusOne + " | color " + (this.getColor(gradePlusOne)));
+			//console.log("crime.js > getLegend(): grade " + i + " | value " + gradePlusOne + " | color " + (this.getColor(gradePlusOne)));
 			legend +=
 			'<i style="background:' + this.getColor(gradePlusOne) + '"></i> ' +
 			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
