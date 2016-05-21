@@ -1,3 +1,11 @@
+/*
+ * Multimedia Cartography web atlas project
+ * ETH Zurich, Spring term 2016
+ *
+ * Authors: Heinz Gnehm, Konstantinos Schoinas, Giulio Taglioferro,
+ * Date:    2016-05-21
+ */
+
 var navigation = {
 		//"plugins": ["checkbox", "dnd", "search", "types", "search"],
 		"plugins": ["checkbox", "dnd", "search", "types"],

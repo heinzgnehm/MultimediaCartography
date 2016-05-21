@@ -1,3 +1,11 @@
+/*
+ * Multimedia Cartography web atlas project
+ * ETH Zurich, Spring term 2016
+ *
+ * Authors: Heinz Gnehm, Konstantinos Schoinas, Giulio Tagliaferro
+ * Date:    2016-05-21
+ */
+
 var chicago_crime = {
 
 	name: "",

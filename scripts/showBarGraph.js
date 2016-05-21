@@ -1,3 +1,11 @@
+/*
+ * Multimedia Cartography web atlas project
+ * ETH Zurich, Spring term 2016
+ *
+ * Authors: Heinz Gnehm, Konstantinos Schoinas, Giulio Taglioferro,
+ * Date:    2016-05-21
+*/
+
 function showBarGraph(id) {
     $(".graph-tab-in").empty();
     $(".graph-tab-in").append("<label id=\"sort-label\"><input type=\"checkbox\">Sort values</label>");
@@ -27,8 +35,8 @@ function showBarGraph(id) {
         .scale(x)
         .orient("bottom")
         .tickFormat(formatPercent)
-		
-		
+
+
     // define y the axis
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -55,16 +63,16 @@ function showBarGraph(id) {
         });
 
         // scale the range of the data
-       x.domain([0, d3.max(data.features,(function(d) { 
-		     return d.Number; 
+       x.domain([0, d3.max(data.features,(function(d) {
+		     return d.Number;
 		}))]);
-        
+
 		y.domain(data.features.map(function(d) {
-			return d.Label; 
+			return d.Label;
 		}));
-		
-		
-		
+
+
+
         // add x axis
         svg.append("g")
             .attr("class", "x axis")
@@ -87,7 +95,7 @@ function showBarGraph(id) {
             .style("text-anchor", "end")
             //.text("Poverty per Community");
 
-			
+
        // Add bar chart
        svg.selectAll("bar")
            .data(data.features)
@@ -97,9 +105,9 @@ function showBarGraph(id) {
            .attr("width", function(d) { return x(d.Number); })
 	       .attr("y", function(d) { return y(d.Label);})
            .attr("height", y.rangeBand())
-			
-			
-			
+
+
+
         // add mouseover event
         .on("mouseover", function(d) {
                 d3.select(this)
@@ -115,7 +123,7 @@ function showBarGraph(id) {
                     .attr("fill", "magenta")
                     .text("Poverty: " + d.Number + " % ");
             })
-            // add mouseout event     			
+            // add mouseout event
             .on("mouseout", function(d) {
                 d3.select(this)
                     .transition()
