@@ -196,14 +196,21 @@ var chicago_crime = {
 		labels = [];
 		// loop through our density intervals and generate a label with a colored square for each interval
 		for (var i = 0; i < this.grades.length; i++) {
+			var gradeText = "";
+			var grade = parseInt(this.grades[i]);
+			if (this.grades[i + 1]) {
+				var nextGrade = parseInt(this.grades[i + 1]);
+				if (grade == nextGrade - 1) {
+					gradeText = grade + "<br>";
+				} else {
+					gradeText = grade + "&ndash;" + (nextGrade - 1) + "<br>";
+				}
+			} else {
+				gradeText = grade + "+";
+			}
 			var gradePlusOne = parseInt(this.grades[i]) + 1;
 			//console.log("crime.js > getLegend(): grade " + i + " | value " + gradePlusOne + " | color " + (this.getColor(gradePlusOne)));
-			legend +=
-			'<i style="background:' + this.getColor(gradePlusOne) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
-			//legend +=
-			//'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			//this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
+			legend += '<i style="background:' + this.getColor(gradePlusOne) + '"></i> ' + gradeText;
 		}
 		return legend;
 	}
