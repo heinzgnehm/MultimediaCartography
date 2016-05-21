@@ -64,7 +64,7 @@ var metadata = {
 		"unit": " %"
 	},
 	"poverty": {
-		"title": "People below poverty level",
+		"title": "Households below poverty level",
 		"unit": " %"
 	},
 	"income": {

@@ -1,3 +1,11 @@
+/*
+ * Multimedia Cartography web atlas project
+ * ETH Zurich, Spring term 2016
+ *
+ * Authors: Heinz Gnehm, Konstantinos Schoinas, Giulio Tagliaferro
+ * Date:    2016-05-21
+ */
+
 var chicago_ethnicity = {
 
 	name: "",
@@ -15,12 +23,12 @@ var chicago_ethnicity = {
 			this.dataSetLoaded = true;
 		}
 		this.id = name.slice(5);
-		console.log("ethnicity.js:init: id = " + this.id);
+		//console.log("ethnicity.js:init: id = " + this.id);
 		this.name = name;
 		this.title = metadata[this.id].title;
 		this.unit = metadata[this.id].unit;
 		//this.createGrades(this.dataSet);
-		console.log("ethnicity.js:init: grades = " + this.grades);
+		//console.log("ethnicity.js:init: grades = " + this.grades);
 	},
 
 	/*
@@ -48,7 +56,7 @@ var chicago_ethnicity = {
 		for (i = 0; i < this.dataSet.features.length; i++) {
 			if (community == this.dataSet.features[i].properties.community) {
 				index = i;
-				console.log("found community " + community + " at index " + index);
+				//console.log("found community " + community + " at index " + index);
 				break;
 			}
 		}
@@ -103,20 +111,6 @@ var chicago_ethnicity = {
 				}
 			}
 			return color[0];
-	},
-
-	getDiv: function() {
-
-		var div = L.DomUtil.create('div', 'info legend'),
-		//grades = this.grades;
-		labels = [];
-		// loop through our density intervals and generate a label with a colored square for each interval
-		for (var i = 0; i < this.grades.length; i++) {
-			div.innerHTML +=
-			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + this.unit + '<br>' : '+' + this.unit);
-		}
-		return div;
 	},
 
 	getLegend: function() {

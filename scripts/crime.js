@@ -138,7 +138,7 @@ var chicago_crime = {
 		var min = this.min(data);
 		var max = this.max(data);
 		var step = Math.round((max - min) / 3);
-		console.log("min: " + min + ", max: " + max + ", step: " + step);
+		//console.log("min: " + min + ", max: " + max + ", step: " + step);
 		this.grades = [];
 		for (i = 0; i <= 3; i++) {
 			this.grades.push(i * step);
