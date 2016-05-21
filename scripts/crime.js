@@ -113,7 +113,7 @@ var chicago_crime = {
 
 		//console.log(density);
 		var threshold = (data.features.length * this.years.length / steps).toFixed();
-		console.log("threshold: " + threshold);
+		//console.log("threshold: " + threshold);
 		var keys = Object.keys(density);
 		var count = 0;
 		this.grades = [];
