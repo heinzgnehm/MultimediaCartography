@@ -1,31 +1,31 @@
 var metadata = {
 	"homicide_pc": {
 		"title": "Homicide",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"burglary_pc": {
 		"title": "Burglary",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"robbery_pc": {
 		"title": "Robbery",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"battery_pc": {
 		"title": "Battery",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"theft_pc": {
 		"title": "Theft",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"assault_pc": {
 		"title": "Assault",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"narcotics_pc": {
 		"title": "Narcotics",
-		"unit": "per 100 000 people"
+		"unit": "per 100 000 residents"
 	},
 	"white_p": {
 		"title": "White population",
@@ -53,11 +53,11 @@ var metadata = {
 	},
 	"crowded": {
 		"title": "Crowded housing",
-		"unit": " percent"
+		"unit": " %"
 	},
 	"poverty": {
 		"title": "People below poverty level",
-		"unit": " percent"
+		"unit": " %"
 	},
 	"income": {
 		"title": "Average income per capita",
@@ -65,14 +65,14 @@ var metadata = {
 	},
 	"diploma": {
 		"title": "Persons 25+ without a high school diploma",
-		"unit": " percent"
+		"unit": " %"
 	},
 	"unemployed": {
 		"title": "Persons 16+ in the labor force that are unemployed",
-		"unit": " percent"
+		"unit": " %"
 	},
 	"notWorkingAge": {
 		"title": "People aged below 18 and above 64",
-		"unit": " percent"
+		"unit": " %"
 	}
 }

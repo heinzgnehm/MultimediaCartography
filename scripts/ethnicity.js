@@ -114,7 +114,7 @@ var chicago_ethnicity = {
 		for (var i = 0; i < this.grades.length; i++) {
 			div.innerHTML +=
 			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + '<br>' : '+');
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + this.grades[i + 1] + this.unit + '<br>' : '+' + this.unit);
 		}
 		return div;
 	},
@@ -127,7 +127,7 @@ var chicago_ethnicity = {
 		for (var i = 0; i < this.grades.length; i++) {
 			legend +=
 			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + this.unit + '<br>' : '+' + this.unit);
 		}
 		return legend;
 	}

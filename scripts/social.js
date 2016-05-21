@@ -41,10 +41,10 @@ var chicago_social = {
 	createGrades: function(data) {
 		var min = this.min(data);
 		var max = this.max(data);
-		var step = Math.round((max - min) / 8);
+		var step = Math.round((max - min) / 5);
 		//console.log("min: " + min + ", max: " + max + ", step: " + step);
 		this.grades = [];
-		for (i = 0; i <= 8; i++) {
+		for (i = 0; i <= 5; i++) {
 			this.grades.push(i * step);
 		}
 	},
@@ -89,7 +89,7 @@ var chicago_social = {
 		for (var i = 0; i < this.grades.length; i++) {
 			legend +=
 			'<i style="background:' + this.getColor(this.grades[i] + 1) + '"></i> ' +
-			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + '<br>' : '+');
+			this.grades[i] + (this.grades[i + 1] ? '&ndash;' + (this.grades[i + 1] - 1) + this.unit + '<br>' : '+' + this.unit);
 		}
 		return legend;
 	}

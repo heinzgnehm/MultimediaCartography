@@ -23,8 +23,8 @@ var chicago_crime = {
 		this.year = Number(name.slice(0, 4));
 		this.id = name.slice(5);
 		//console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
-		this.title = metadata[this.id].title + " " + year.toFixed(0);
 		this.unit = metadata[this.id].unit;
+		this.title = metadata[this.id].title + " " + year.toFixed() + " (" + this.unit + ")";
 		//this.createGrades(this.dataSet);
 		//console.log("linear grades " + this.grades);
 		this.createNonLinearGrades(this.dataSet, 4);
@@ -79,7 +79,7 @@ var chicago_crime = {
   setYear(year) {
 		this.year = Math.floor(year);
 		this.name = this.year + ":" + this.id;
-		this.title = metadata[this.id].title + " " + this.year;
+		this.title = metadata[this.id].title + " " + this.year + " (" + this.unit + ")";
 		//console.log("year: " + this.year + ", id: " + this.id);
 	},
 
