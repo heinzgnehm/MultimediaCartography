@@ -46,6 +46,9 @@ var navigation = {
 								"id": "crime:battery_pc",
 								"text": "Battery",
 								"icon": "icons/svg/layer.svg",
+								"state": {
+   					                		 "selected": false,
+              								},
 						}, {
 								"id": "crime:theft_pc",
 								"text": "Theft   ",
@@ -138,8 +141,8 @@ var navigation = {
 					}).jstree({});*/
 
 			$('#layers-tree').on("select_node.jstree", function (e, data) {
-				console.log(e);
-				console.log(data);
+				//console.log(e);
+				//console.log(data);
 				// get last selected data
 				id = data.selected[data.selected.length-1];
 				// deselect all the rest
@@ -182,6 +185,10 @@ var navigation = {
 
 
 		});
+		//show first dtaset
+		//showDataSet('crime', '2000' + ":" + 'battery_pc'); showSlider();
+		//$('#layers-tree').jstree(true).select_node('crime:battery_pc');
+		
 
 
 
@@ -513,35 +520,11 @@ function refreshinfo(data) {
                 $('#' + subid + '-info').button().click(function(event) {
                     id = event.currentTarget.getAttribute('id');
                     showAboutTheData(id);
-		    /*console.log(id);
-                    $('#dialog').dialog({
-                        title: id
-                    });
-										//$('#dialogframe').prop('src', 'info/info.html#' + id);
-										$('#dialogframe').prop('src', 'info/info.html#' + id);
-										console.log("gui.js > refreshinfo() > bottom: call info page at info/info.html#" + id);*/
-                    //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
                     event.preventDefault();
                 });
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
 		    updateBarGraph(event);
-		    //$(".graph-tab").load('graph/BarGraphSort.html?id='+ id);
-		    /*$('#bar-graph').dialog({
-                        title: 'Bar Graph',
-                        name: id,
-                        position: {
-                        	my: "left top",
-                        	at: "right top",
-                        	of: ".navigation",
-                        	collision: 'none',
-
-                        },
-                        height: $(window).height()-38-105,
-                        width: $(window).width()-330,
-
-                    });
-                    $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);*/
                     event.preventDefault();
                 });
             }
@@ -591,54 +574,25 @@ function infocreate(data) {
         });
         if (data[i].state.opened == true) {
             for (j = 0; j < data[i].children.length; j++) {
-		subid =data[folder].children[j].replace(/:/g,'-');
+		subid =data[i].children[j].id.replace(/:/g,'-');
 		// bar graph test
 		var newbuttoncontainer = $("<div class=\"jstree-button-container\"></div>");
+		// bar graph test
 		var newbar = "<button  id=\""  + subid + "-bar\" class=\"ui-btn ui-corner-all  jstree-button bar-button\"></button>";
-                //console.log(data[data[folder].children[j]].state.opened);
-                var newinfo = "<button id=\"" + subid + "-info\" class=\"ui-btn ui-shadow ui-corner-all info-button\">info</button>";
-                //console.log(newinfo);
-                newbuttoncontainer.append(newinfo);
+		newbuttoncontainer.append(newbar);
+                //console.log(data[subid].state.opened);
+                var newinfo = "<button id=\"" + subid + "-info\" class=\"ui-btn ui-shadow ui-corner-all jstree-button info-button\">info</button>";
+               newbuttoncontainer.append(newinfo);
 		$("#jstree-button-tab").append(newbuttoncontainer);
+		// add event listener to info button
                 $('#' + subid + '-info').button().click(function(event) {
                     id = event.currentTarget.getAttribute('id');
                     showAboutTheData(id);
-                    /*$('#dialog').dialog({
-                        title: id
-                    });
-										$('#dialogframe').prop('src', 'info/info.html#' + id);
-										console.log("gui.js > infocreate() > bottom: call info page at info/info.html#" + id);*/
-                    //$('#dialogframe').prop('src', 'Descriptions/' + id + '.html');
                     event.preventDefault();
                 });
 		// bar button clicl event
 		$('#' + subid + '-bar').button().click(function(event) {
-                    id = event.target.getAttribute('id');
-                    console.log(id);
-		    if (id.split('-')[0]=="crime"){
-		    	year=parseInt(slider.noUiSlider.get());
-		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];
-		    	}
-		    if (id.split('-')[0]=="ethnicity"){
-		    	year=parseInt(slider.noUiSlider.get());
-		    	id=id.split('-')[0]+'-'+'2010'+':'+id.split('-')[1]+'-'+id.split('-')[2];
-		    	}
-
-		    $('#bar-graph').dialog({
-                        title: 'Bar Graph',
-                        name: id,
-                        position: {
-                        	my: "left top",
-                        	at: "right top",
-                        	of: ".navigation",
-                        	collision: 'none',
-
-                        },
-                        height: $(window).height()-38-105,
-                        width: $(window).width()-330,
-
-                    });
-                    $('#bar-graph-frame').prop('src', 'graph/BarGraphSort.html?id='+ id);
+		    updateBarGraph(event);
                     event.preventDefault();
                 });
             }
