@@ -377,7 +377,7 @@ $('#menu-1,#menu-2').menu();
 display only four result and when clicked on the result zoom either to its bbox (if present) or to its center*/
 function geocodeThis() {
     var text = document.getElementById('search').value;
-    console.log(text);
+   //console.log(text);
     if (text.length >= 1) {
         geocoderControl.geocoder.query({
             query: text,
@@ -386,7 +386,7 @@ function geocodeThis() {
         }, function(err, res) {
             $("#search-results").empty();
             //console.log(err);
-            console.log(res.results.features);
+           //console.log(res.results.features);
             results = res.results.features;
             if (results.length > 0) {
                 var maxitems = 4;
@@ -472,7 +472,7 @@ $('#search').keydown(function(e) {
 });
 
 geocoderControl.on('found', function(res) {
-    console.log(res);
+   //console.log(res);
     //output.innerHTML = JSON.stringify(res.results.features[0]);
 });
 
@@ -637,7 +637,7 @@ $('#layers-tree')
 $('#layers-tree')
     // listen for event
     .on('move_node.jstree', function(e, data) {
-        console.log("hheee");
+       //console.log("hheee");
         refreshinfo($("#layers-tree").jstree(true)._model.data);
     })
 
@@ -661,7 +661,7 @@ function updateBarGraph(event){
                     } else {
                     	id=currentBarId;
                     }
-                    console.log(id);
+                   //console.log(id);
 		    if (id.split('-')[0]=="crime"){
 		    	year=parseInt(slider.noUiSlider.get());
 		    	id=id.split('-')[0]+'-'+year.toString()+':'+id.split('-')[1]+'-'+id.split('-')[2];

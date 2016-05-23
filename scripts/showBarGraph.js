@@ -10,7 +10,7 @@ function showBarGraph(id) {
     $(".graph-tab-in").empty();
     $(".graph-tab-in").append("<label id=\"sort-label\"><input type=\"checkbox\">Sort values</label>");
     id = id.split('-');
-    console.log(id);
+   //console.log(id);
     var dataset = id[0];
     var property_name = id[1];
     // set the dimensions of the canvas
@@ -52,7 +52,7 @@ function showBarGraph(id) {
             "translate(" + margin.left + "," + margin.top + ")");
 
     // load the data
-    console.log("../data/" + dataset + ".geojson");
+   //console.log("../data/" + dataset + ".geojson");
     d3.json("data/" + dataset + ".geojson", function(error, data) {
 
         data.features.forEach(function(d) {
