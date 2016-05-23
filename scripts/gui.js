@@ -705,17 +705,17 @@ function showHelp(){
    	//$("#layers-tree").jstree(true).deselect_node("crime:homicide_pc");
    	// create all tips
    	createMark('help',{dx:50,dy:30},"Close help mode",'pointer');
-   	createMark('landing',{dx:50,dy:70},"Back to landing page");
+   	createMark('landing',{dx:50,dy:70},"Back to welcome page");
    	createMark('fullscreen',{dx:50,dy:110},"Fullscreen");
 
    	createMark('crime-info',{dx:100,dy:20},"Info about the dataset");
-   	createMark('crime-burglary_pc-bar',{dx:120,dy:20},"Generate bar graph for the dataset");
+   	createMark('crime-burglary_pc-bar',{dx:120,dy:20},"Show bar graph for the dataset");
    	createMark('crime:theft_pc_anchor',{dx:230,dy:20},"Select the dataset",'menu-anchor');
 
-   	createMark('about',{dx:-50,dy:70},"About the Atlas");
-   	createMark('imprint',{dx:-50,dy:30},"Imprint");
+   	createMark('about',{dx:-50,dy:70},"Brief description of the Atlas");
+   	createMark('imprint',{dx:-50,dy:30},"Imprint : Where was the atlas made and by who");
 
-   	createMark('home-map',{dx:-50,dy:20},"Zoom to initial view");
+   	createMark('home-map',{dx:-50,dy:50},"Zoom to initial view");
    	createMark('noUi-handle',{dx:50,dy:-20},"Change year",'handle');
 
    	$("*:not(.tips):not(body)").addClass("trasparent");
