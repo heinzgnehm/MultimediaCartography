@@ -185,9 +185,14 @@ var navigation = {
 
 
 		});
+		/*fr unkow reason the addFolder click method works only when the event listener on changed is trigeerd
+		so it will be trigged on purpose at the beginning*/
+		setTimeout(function() {
+           				addFolderClick();
+       				}, 1000);
 		//show first dtaset
 		//showDataSet('crime', '2000' + ":" + 'battery_pc'); showSlider();
-		//$('#layers-tree').jstree(true).select_node('crime:battery_pc');
+		
 		
 
 
@@ -618,6 +623,7 @@ $('#layers-tree')
     // listen for event
     .on('changed.jstree', function(e, data) {
 	refreshinfo($("#layers-tree").jstree(true)._model.data);
+	addFolderClick()
         // to do: toggle visibility of layers.
     })
 //open
@@ -869,3 +875,20 @@ window.addEventListener("resize", function(){
     	showHelp();
     }
 });
+/*** 
+	when click on the folder the folder open
+***/
+function addFolderClick(){
+	//console.log('add clcik');
+	// toggle folder when you click on the whole anchor unelegant way
+	$('#crime_anchor').click(function() {
+		$("#layers-tree").jstree(true).toggle_node("crime");
+		});
+	$('#ethnicity_anchor').click(function() {
+		$("#layers-tree").jstree(true).toggle_node("ethnicity");
+		});
+	$('#social_anchor').click(function() {
+		$("#layers-tree").jstree(true).toggle_node("social");
+		});
+	
+}
