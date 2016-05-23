@@ -8,7 +8,7 @@
 		<!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/> -->
 
 		<!-- Local stylesheets -->
-		<link rel="stylesheet" type="text/css" href="libs/leaflet-0.7.7/leaflet.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="libs/leaflet-0.7.7/leaflet.css"/>-->
 		<!--<link rel="stylesheet" type="text/css" href="styles/chicago.css"/>-->
 		<link rel="stylesheet" type="text/css" href="styles/Atlas.css"/>
 		<link rel="stylesheet" type="text/css" href="libs/jquery-ui-1.11.4/jquery-ui.css">
@@ -171,7 +171,8 @@
 						       maxBounds: chicagoBounds,
     						       maxZoom: 16,
    						       minZoom: 10}).setView([41.8369, -87.6847], 11);
-			map.addControl(L.control.zoom({position: 'topright'}));
+			//map.addControl(L.control.zoom({position: 'topright'}));
+			new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 			/*
 				Load OpenStreeMap data from Mapbox.
