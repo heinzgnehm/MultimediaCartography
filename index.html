@@ -314,6 +314,7 @@
 			/* function to load the external html into the bar/infp panel has to be here for the urls policy*/
 			function showAboutTheData(id){
 					id = id || 0;
+					isBarGraph=false;
 					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
 					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
@@ -366,6 +367,7 @@
 			}
 			/**/
 			function showImprint(){
+					isBarGraph=false;
 					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
 					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
@@ -374,6 +376,7 @@
 					map.invalidateSize();
 					}
 			function showAbout(){
+					isBarGraph=false;
 					var graphPanelWidth=$(window).width()-parseInt($(".navigation").css("width"))-640-50;
 					$('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 					$('.map').css("right",(graphPanelWidth-2).toString()+"px");
