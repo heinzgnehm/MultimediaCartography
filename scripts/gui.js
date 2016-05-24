@@ -191,7 +191,7 @@ var navigation = {
            				addFolderClick();
        				}, 1000);
 		//show first dtaset
-		//showDataSet('crime', '2000' + ":" + 'battery_pc'); showSlider();
+		//showDataSet('crime', '2003' + ":" + 'battery_pc'); showSlider();
 		
 		
 
