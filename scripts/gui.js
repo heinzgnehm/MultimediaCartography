@@ -706,6 +706,7 @@ function updateBarGraph(event){
 }
 
 function showHelp(){
+	$("#catch-click").css("visibility","visible");
 	$(".tips").remove();
 	$("#layers-tree").jstree(true).open_node("crime");
    	//$("#layers-tree").jstree(true).deselect_node("crime:homicide_pc");
@@ -726,6 +727,7 @@ function showHelp(){
 
    	$("*:not(.tips):not(body)").addClass("trasparent");
    	$("#help-help").click(function() {
+   			 $("#catch-click").css("visibility","hidden");
  			 $(".tips").remove();
 			 $("*:not(.tips):not(body):not(#help)").removeClass("trasparent");
 			 $("#help").button({

@@ -416,3 +416,12 @@ filter:none !important;}
 .noUi-value{
 	font-size:140% !important;
 	}
+#catch-click{
+	position:fixed;
+	left:0;top:0;right:0;bottom:0;
+	background:#000000;
+	opacity:0;
+	filter:alpha(opacity=0);
+	z-index:9;
+	visibility:hidden;
+	    };
