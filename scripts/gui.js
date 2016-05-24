@@ -712,8 +712,8 @@ function showHelp(){
    	//$("#layers-tree").jstree(true).deselect_node("crime:homicide_pc");
    	// create all tips
    	createMark('help',{dx:50,dy:30},"Close help mode",'pointer');
-   	createMark('landing',{dx:50,dy:70},"Back to welcome page");
-   	createMark('fullscreen',{dx:50,dy:110},"Fullscreen");
+   	createMark('landing',{dx:50,dy:110},"Back to welcome page");
+   	createMark('fullscreen',{dx:50,dy:70},"Fullscreen");
 
    	createMark('crime-info',{dx:100,dy:20},"Info about the dataset");
    	createMark('crime-burglary_pc-bar',{dx:120,dy:20},"Show bar graph for the dataset");
