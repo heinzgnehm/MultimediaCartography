@@ -275,13 +275,13 @@ var navigation = {
 
 		$("#fullscreen").button({
 		    icons: {
-		        primary: "ui-icon-arrow-4-diag"
+		        primary: "ui-icon-custom-fullscreen"
 		    },
 		    text: false
 		});
 		$("#landing").button({
 		    icons: {
-		        primary: "ui-icon-home"
+		        primary: "ui-icon-fa-home"
 		    },
 		    text: false
 		});
@@ -308,6 +308,16 @@ var navigation = {
 		        primary: "ui-icon-helps"
 		    },
 		    text: false
+		});
+		$("#about").button({
+		    icons: {
+		        primary: "ui-icon-fa-navicon"
+		    }
+		});
+		$("#imprint").button({
+		    icons: {
+		        primary: "ui-icon-fa-navicon"
+		    }
 		});
 		$("#home-map").button({
 		   /* icons: {
