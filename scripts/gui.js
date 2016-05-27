@@ -668,7 +668,7 @@ function updateBarGraph(event){
 		    $('.graph-panel').css("width",graphPanelWidth.toString()+"px");
 		    $('.map').css("right",(graphPanelWidth-2).toString()+"px");
 		    if (event!=0){
-		    	console.log("siamo qui");
+		    	//console.log("siamo qui");
 		    	$('.graph-tab-out').animate({
   				scrollTop: 0
 		    		}, 0);
