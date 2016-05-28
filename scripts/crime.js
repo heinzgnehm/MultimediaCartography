@@ -9,7 +9,7 @@
 var chicago_crime = {
 
 	name: "",
-	year: 0,
+	year: 2003,
 	id: "",
 	title: "",
 	unit: "",
@@ -32,7 +32,7 @@ var chicago_crime = {
 		this.id = name.slice(5);
 		//console.log("year: " + this.year + ", id: " + this.id + ", name: " + this.name);
 		this.unit = metadata[this.id].unit;
-		this.title = metadata[this.id].title + " " + year.toFixed() + " (" + this.unit + ")";
+		this.title = metadata[this.id].title + " " + this.year.toFixed() + " (" + this.unit + ")";
 		//this.createGrades(this.dataSet);
 		//console.log("linear grades " + this.grades);
 		this.createNonLinearGrades(this.dataSet, 4);
