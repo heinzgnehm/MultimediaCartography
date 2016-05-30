@@ -14,11 +14,11 @@ a:visited {
 }
 
 .bar{
-    fill: steelblue;
+    fill:#778899;
   }
 
   .bar:hover{
-    fill: brown;
+    fill: lightblue;
   }
 
 	.axis {

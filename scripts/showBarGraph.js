@@ -8,22 +8,25 @@
 
 function showBarGraph(id) {
     $(".graph-tab-in").empty();
-    $(".graph-tab-in").append("<label id=\"sort-label\"><input type=\"checkbox\">Sort values</label>");
+   // $(".graph-tab-in").append("<label id=\"sort-label\"><input type=\"checkbox\">Sort values</label>");
     id = id.split('-');
-   //console.log(id);
+   console.log(id);
+console.log("EEEEE");
     var dataset = id[0];
     var property_name = id[1];
+    console.log('property_name')
     // set the dimensions of the canvas
     var margin = {
-            top: 10,
+            top: 60,
             right: 20,
-            bottom: 100,
-            left: 130
+            bottom: 30,
+            left: 150
         },
-        width = 800 - margin.left - margin.right,
-        height = 1000 - margin.top - margin.bottom;
+        width = 600 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
 
-    // arrange the format of the percent label of y axis in integer
+		
+	// arrange the format of the percent label of y axis in integer
     var formatPercent = d3.format("d");
 
     // set the ranges of each axis
@@ -52,14 +55,12 @@ function showBarGraph(id) {
             "translate(" + margin.left + "," + margin.top + ")");
 
     // load the data
-   //console.log("../data/" + dataset + ".geojson");
     d3.json("data/" + dataset + ".geojson", function(error, data) {
 
         data.features.forEach(function(d) {
-            	//console.log(d);
             d.Label = d.properties.community;
-            d.Number = d.properties[property_name]; //.PERCENT_OF;
-            //console.log("community: " + d.properties.community + "; percent: " + d.properties.PERCENT_OF);
+            d.Number = d.properties[property_name]; 
+            
         });
 
         // scale the range of the data
@@ -76,14 +77,22 @@ function showBarGraph(id) {
         // add x axis
         svg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
+            .attr("transform", "translate(0," - height + ")")
             .call(xAxis)
             .selectAll("text")
             .style("text-anchor", "end")
             .attr("dx", "-.8em")
             .attr("dy", "-.55em")
-            .attr("transform", "rotate(-90)");
-
+            .attr("transform", "rotate(90)");
+			
+			 // Units text
+	    svg.append("text")
+	        .attr("x", width-20)
+	        .attr("y", -16)
+            .style("text-anchor", "middle")
+	        //.text("") ;
+	  
+			
         // add y axis
         svg.append("g")
             .attr("class", "y axis")
@@ -93,8 +102,7 @@ function showBarGraph(id) {
             .attr("y", 5)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            //.text("Poverty per Community");
-
+            
 
        // Add bar chart
        svg.selectAll("bar")
@@ -106,23 +114,29 @@ function showBarGraph(id) {
 	       .attr("y", function(d) { return y(d.Label);})
            .attr("height", y.rangeBand())
 
-
-
-        // add mouseover event
-        .on("mouseover", function(d) {
-                d3.select(this)
-                    .attr("fill", "red");
-                svg.append("text")
-                    .attr("id", "tooltip")
-                    .attr("x", 450)
-                    .attr("y", height)
-                    .attr("text-anchor", "middle")
-                    .attr("font-family", "sans-serif")
-                    .attr("font-size", "15px")
-                    .attr("font-weight", "bold")
-                    .attr("fill", "magenta")
-                    .text("Poverty: " + d.Number + " % ");
-            })
+        
+			// add mouseover event
+        .on("mouseover", function(d){
+   
+            var xPos = parseFloat(d3.select(this).attr("width"));
+		    var yPos = parseFloat(d3.select(this).attr("y"));
+             var mousetext = parseInt(d.Number);
+ 
+             d3.select(this)
+            .attr("fill", "lightblue");
+             svg.append("text")
+            .attr("id", "tooltip")
+            .attr("x", xPos + 9 )
+            .attr("y", yPos + 8)
+            .attr("text-anchor", "middle")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("font-weight", "bold")
+            .attr("fill", "grey")
+            .text("" + mousetext + "" );
+          })
+			
+						
             // add mouseout event
             .on("mouseout", function(d) {
                 d3.select(this)
@@ -134,9 +148,8 @@ function showBarGraph(id) {
                 d3.select("#tooltip").remove();
             });
 
-
         // sort data with time interval
-        d3.select("input").on("change", change);
+        d3.select("input").on("click", change);
 
         var sortTimeout = setTimeout(function() {
             d3.select("input").property("checked", true).each(change);
@@ -144,7 +157,8 @@ function showBarGraph(id) {
 
         function change() {
             clearTimeout(sortTimeout);
-
+			
+			
             // Copy-on-write since tweens are evaluated after a delay
             var y0 = y.domain(data.features.sort(this.checked ?
 
@@ -152,7 +166,7 @@ function showBarGraph(id) {
                             return b.Number - a.Number;
                         } :
                         function(a, b) {
-                            return d3.ascending(a.Label, b.Label);
+                            return d3.ascending(b.Label, a.Label);
                         })
                     .map(function(d) {
                         return d.Label;
@@ -193,5 +207,41 @@ function showBarGraph(id) {
                 .delay(delay);
 
         }
+
+		// add title
+            svg.append("text")
+                .attr("x", (width / 2))             
+                .attr("y", - (margin.top / 2)-15)
+                .attr("text-anchor", "middle")  
+                .style("font-size", "20px") 
+                .text("" +legendname(property_name, dataset));
+
+		
     });
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+function legendname(property_name, dataset){
+if (dataset == 'crime'){
+var yearname = property_name.split(":")[0];
+var propertyname = capitalizeFirstLetter(property_name.split(":")[1].split('_')[0]);
+return propertyname + ' in ' +yearname;
+}
+
+else if (dataset == 'ethnicity'){
+var yearname = property_name.split(":")[0];
+var propertyname1 = capitalizeFirstLetter(property_name.split(":")[1].split('_')[0]);
+return propertyname1 + ' Percent in ' +yearname;
+}
+
+
+else if (dataset == 'social'){
+var propertyname = capitalizeFirstLetter(property_name);
+return propertyname + ' Percent in 2010 ';
+
+}
+} 
+}
+
