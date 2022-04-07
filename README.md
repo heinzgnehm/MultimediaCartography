@@ -1,2 +1,2 @@
 # MultimediaCartography
-Multimedia cartography web atlas project
+Multimedia cartography web atlas project [May 2016]
